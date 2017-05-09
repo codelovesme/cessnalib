@@ -17,7 +17,11 @@
     "cessnalib",
     "lib"
   ],
-  "author": "codelovesme@gmail.com",
+  "typings": "./src/index.d.ts",
+  "author": {
+    "name": "Fedai Kaya",
+    "email": "codelovesme@gmail.com"
+  },
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/codelovesme/cessnalib/issues"
