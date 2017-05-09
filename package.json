@@ -1,0 +1,31 @@
+{
+  "name": "cessnalib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codelovesme/cessnalib.git"
+  },
+  "keywords": [
+    "cessnalib",
+    "lib"
+  ],
+  "author": "codelovesme@gmail.com",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/codelovesme/cessnalib/issues"
+  },
+  "homepage": "https://github.com/codelovesme/cessnalib#readme",
+  "devDependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/mocha": "^2.2.41",
+    "chai": "^3.5.0"
+  }
+}

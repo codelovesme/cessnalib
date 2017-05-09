@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": true,
+        "removeComments": false,
+        "sourceMap": true,
+        "declaration":true
+    },
+    "files": [ "src/index.ts","test/index.ts"]
+}
