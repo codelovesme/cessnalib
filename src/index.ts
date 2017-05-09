@@ -1,3 +1,5 @@
+
+import * as sift from "sift";
 export const JavascriptDate = Date;
 export const JavascriptObject = Object;
 

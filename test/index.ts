@@ -179,6 +179,115 @@ describe("euglena", () => {
                     chai.expect(propCount).to.be.equals(2);
                 });
             });
+            describe("doesMongoCover", () => {
+                it("should return true if obj1 mongoCover obj2 - 1", () => {
+                    //given
+                    let obj1 = {
+                        a: { $exists: true }
+                    };
+                    let obj2 = {
+                        a: "done"
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.true;
+                });
+                it("should return false if obj1 doesnt mongoCover obj2 - 1", () => {
+                    //given
+                    let obj1 = {
+                        a: { $exists: false }
+                    };
+                    let obj2 = {
+                        a: "done"
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.false;
+                });
+                it("should return true if obj1 mongoCover obj2 - 2", () => {
+                    //given
+                    let obj1 = {
+                        a: { $exists: true },
+                        k: { $exists: false },
+                        b: { $gte: 12 }
+                    };
+                    let obj2 = {
+                        a: "done",
+                        b: 34,
+                        c: { d: "d" }
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //
+                    chai.expect(result).to.be.true;
+                });
+                it("should return false if obj1 mongoCover obj2 - 2", () => {
+                    //given
+                    let obj1 = {
+                        a: { $exists: true },
+                        b: { $gte: 12 },
+                        c: { d: "de" }
+                    };
+                    let obj2 = {
+                        a: "done",
+                        b: 34,
+                        c: { d: "d" }
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.false;
+                });
+                it("should return true if obj1 mongoCover obj2 - 3", () => {
+                    //given
+                    let obj1 = {
+                        a: { $exists: true },
+                        b: { $gte: 12 },
+                        c: { d: "d" }
+                    };
+                    let obj2 = {
+                        a: "done",
+                        b: 34,
+                        c: { d: "d" }
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.true;
+                });
+                it("should return true if obj1 mongoCover obj2 - 4", () => {
+                    //given
+                    let obj1 = {
+                        c: { d: "d" }
+                    };
+                    let obj2 = {
+                        a: "done",
+                        b: 34,
+                        c: { d: "d", e: "e" }
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.true;
+                });
+                it("should return true if obj1 mongoCover obj2 - 5", () => {
+                    //given
+                    let obj1 = {
+                        "c.d": "d"
+                    };
+                    let obj2 = {
+                        a: "done",
+                        b: 34,
+                        c: { d: "d", e: "e" }
+                    };
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.true;
+                });
+            });
         });
     });
 });
