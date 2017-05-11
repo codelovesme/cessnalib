@@ -541,7 +541,6 @@ var sys;
                         for (var i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {
                                 returnValue.push(array[i]);
-                                i--;
                             }
                         }
                     }
@@ -549,7 +548,6 @@ var sys;
                         for (var i = 0; i < array.length; i++) {
                             if (array[i] == k) {
                                 returnValue.push(array[i]);
-                                i--;
                             }
                         }
                     }

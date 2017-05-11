@@ -441,14 +441,12 @@ export namespace sys {
                         for (let i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {
                                 returnValue.push(array[i]);
-                                i--;
                             }
                         }
                     } else {
                         for (let i = 0; i < array.length; i++) {
                             if ((array[i] as any) == k) {
                                 returnValue.push(array[i]);
-                                i--;
                             }
                         }
                     }
