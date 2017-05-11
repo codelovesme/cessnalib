@@ -535,6 +535,26 @@ var sys;
                         }
                     }
                 };
+                Array.getAllMatched = function (array, k, compare) {
+                    var returnValue = [];
+                    if (compare) {
+                        for (var i = 0; i < array.length; i++) {
+                            if (compare(array[i], k)) {
+                                returnValue.push(array[i]);
+                                i--;
+                            }
+                        }
+                    }
+                    else {
+                        for (var i = 0; i < array.length; i++) {
+                            if (array[i] == k) {
+                                returnValue.push(array[i]);
+                                i--;
+                            }
+                        }
+                    }
+                    return returnValue;
+                };
                 Array.removeAllMatched = function (array, k, compare) {
                     var returnValue = [];
                     if (compare) {

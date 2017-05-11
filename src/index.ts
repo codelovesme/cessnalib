@@ -435,6 +435,25 @@ export namespace sys {
                         }
                     }
                 }
+                public static getAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
+                    let returnValue: T[] = [];
+                    if (compare) {
+                        for (let i = 0; i < array.length; i++) {
+                            if (compare(array[i], k)) {
+                                returnValue.push(array[i]);
+                                i--;
+                            }
+                        }
+                    } else {
+                        for (let i = 0; i < array.length; i++) {
+                            if ((array[i] as any) == k) {
+                                returnValue.push(array[i]);
+                                i--;
+                            }
+                        }
+                    }
+                    return returnValue;
+                }
                 public static removeAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
                     let returnValue: T[] = [];
                     if (compare) {

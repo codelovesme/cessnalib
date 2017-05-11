@@ -143,6 +143,7 @@ export declare namespace sys {
                 static indexOf<T, K>(array: T[], k: K, compare?: (arrayItem: T, k: K) => boolean): number;
                 static removeAt<T>(array: T[], index: number): T;
                 static remove<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T;
+                static getAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[];
                 static removeAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[];
             }
         }
