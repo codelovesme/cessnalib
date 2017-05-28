@@ -45,6 +45,17 @@ export namespace js {
             }
             return primaryInstance;
         }
+        public static patch(source: any, patch: any) {
+            let obj = Class.clone(source, true);
+            for (let key in patch) {
+                if (Class.isPrimitiveType(obj[key])) {
+                    obj[key] = patch[key];
+                } else {
+                    obj[key] = Class.patch(obj[key], patch[key]);
+                }
+            }
+            return obj;
+        }
         public static classify(emptyInstance: any, valueObj: any) {
             for (var prop in emptyInstance) {
                 if (("function" !== typeof emptyInstance[prop]) && !emptyInstance[prop]) emptyInstance[prop] = valueObj[prop];

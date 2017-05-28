@@ -52,6 +52,18 @@ var js;
             }
             return primaryInstance;
         };
+        Class.patch = function (source, patch) {
+            var obj = Class.clone(source, true);
+            for (var key in patch) {
+                if (Class.isPrimitiveType(obj[key])) {
+                    obj[key] = patch[key];
+                }
+                else {
+                    obj[key] = Class.patch(obj[key], patch[key]);
+                }
+            }
+            return obj;
+        };
         Class.classify = function (emptyInstance, valueObj) {
             for (var prop in emptyInstance) {
                 if (("function" !== typeof emptyInstance[prop]) && !emptyInstance[prop])
