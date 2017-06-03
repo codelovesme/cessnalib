@@ -347,7 +347,6 @@ var sys;
                 function TimeSpan() {
                 }
                 TimeSpan.fromUnixTimestamp = function (timestamp) {
-                    timestamp *= 1000;
                     var days = Math.floor(timestamp / (1000 * 60 * 60 * 24));
                     timestamp -= days * (1000 * 60 * 60 * 24);
                     var hours = Math.floor(timestamp / (1000 * 60 * 60));
@@ -360,11 +359,11 @@ var sys;
                     return new sys.type.TimeSpan(days, hours, minutes, seconds, miliseconds);
                 };
                 TimeSpan.toUnixTimestamp = function (timespan) {
-                    var fromdays = timespan.days * 60 * 60 * 24;
-                    var fromhours = timespan.hours * 60 * 60;
-                    var fromminutes = timespan.minutes * 60;
-                    var fromseconds = timespan.seconds;
-                    var frommiliseconds = timespan.miliseconds / 1000;
+                    var fromdays = timespan.days * 60 * 60 * 24 * 1000;
+                    var fromhours = timespan.hours * 60 * 60 * 1000;
+                    var fromminutes = timespan.minutes * 60 * 1000;
+                    var fromseconds = timespan.seconds * 1000;
+                    var frommiliseconds = timespan.miliseconds;
                     return fromdays + fromhours + fromminutes + fromseconds + frommiliseconds;
                 };
                 return TimeSpan;

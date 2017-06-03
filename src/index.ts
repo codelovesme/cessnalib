@@ -264,7 +264,6 @@ export namespace sys {
             }
             export class TimeSpan {
                 public static fromUnixTimestamp(timestamp: number): sys.type.TimeSpan {
-                    timestamp *= 1000;
                     var days = Math.floor(timestamp / (1000 * 60 * 60 * 24));
                     timestamp -= days * (1000 * 60 * 60 * 24);
 
@@ -282,11 +281,11 @@ export namespace sys {
                     return new sys.type.TimeSpan(days, hours, minutes, seconds, miliseconds);
                 }
                 public static toUnixTimestamp(timespan: sys.type.TimeSpan): number {
-                    let fromdays = timespan.days * 60 * 60 * 24;
-                    let fromhours = timespan.hours * 60 * 60;
-                    let fromminutes = timespan.minutes * 60;
-                    let fromseconds = timespan.seconds;
-                    let frommiliseconds = timespan.miliseconds / 1000;
+                    let fromdays = timespan.days * 60 * 60 * 24 * 1000;
+                    let fromhours = timespan.hours * 60 * 60 * 1000;
+                    let fromminutes = timespan.minutes * 60 * 1000;
+                    let fromseconds = timespan.seconds * 1000;
+                    let frommiliseconds = timespan.miliseconds;
                     return fromdays + fromhours + fromminutes + fromseconds + frommiliseconds;
                 }
             }
