@@ -41,11 +41,21 @@ var js;
         Class.clone = function (obj, deep) {
             if (this.isPrimitiveType(obj))
                 return obj;
-            var sub = {};
-            for (var prop in obj) {
-                sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
+            if (obj instanceof Array) {
+                var sub_1 = [];
+                for (var _i = 0, obj_1 = obj; _i < obj_1.length; _i++) {
+                    var item = obj_1[_i];
+                    sub_1.push(Class.clone(item, true));
+                }
+                return sub_1;
             }
-            return sub;
+            else {
+                var sub = {};
+                for (var prop in obj) {
+                    sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
+                }
+                return sub;
+            }
         };
         Class.merge = function (primaryInstance, secondaryInstance) {
             for (var prop in secondaryInstance) {

@@ -34,11 +34,19 @@ export namespace js {
         }
         public static clone<T extends any>(obj: T, deep: boolean): T {
             if (this.isPrimitiveType(obj)) return obj;
-            var sub: any = {};
-            for (var prop in obj) {
-                sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
+            if (obj instanceof Array) {
+                let sub = [];
+                for (let item of obj) {
+                    sub.push(Class.clone(item, true));
+                }
+                return sub as any;
+            } else {
+                var sub: any = {};
+                for (var prop in obj) {
+                    sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
+                }
+                return <T>sub;
             }
-            return <T>sub;
         }
         public static merge(primaryInstance: any, secondaryInstance: any) {
             for (var prop in secondaryInstance) {
