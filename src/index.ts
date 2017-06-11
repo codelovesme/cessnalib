@@ -33,7 +33,7 @@ export namespace js {
             return subInstance;
         }
         public static clone<T extends any>(obj: T, deep: boolean): T {
-            if(this.isPrimitiveType(obj)) return obj;
+            if (this.isPrimitiveType(obj)) return obj;
             var sub: any = {};
             for (var prop in obj) {
                 sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
@@ -225,6 +225,11 @@ export namespace sys {
             export const Exception = new sys.type.Exception("Exception", null);
         }
         export namespace StaticTools {
+            export class Primitive {
+                public static equals(val1: any, val2: any) {
+                    return val1 === val2;
+                }
+            }
             export class Object {
                 public static equals(obj1: any, obj2: any, deep?: boolean) {
                     let obj1keys = JavascriptObject.keys(obj1);

@@ -100,6 +100,9 @@ export declare namespace sys {
             const Exception: Exception;
         }
         namespace StaticTools {
+            class Primitive {
+                static equals(val1: any, val2: any): boolean;
+            }
             class Object {
                 static equals(obj1: any, obj2: any, deep?: boolean): boolean;
             }
