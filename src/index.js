@@ -289,9 +289,9 @@ var sys;
             var Any = (function () {
                 function Any() {
                 }
-                Any.equals = function (val1, val2) {
+                Any.equals = function (val1, val2, deep) {
                     return (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
-                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2));
+                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2, deep));
                 };
                 return Any;
             }());

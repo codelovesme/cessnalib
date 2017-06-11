@@ -102,7 +102,7 @@ export declare namespace sys {
         }
         namespace StaticTools {
             class Any {
-                static equals(val1: any, val2: any): boolean;
+                static equals(val1: any, val2: any, deep: boolean): boolean;
             }
             class Primitive {
                 static equals(val1: Primitive, val2: Primitive): boolean;

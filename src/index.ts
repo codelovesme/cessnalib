@@ -227,9 +227,9 @@ export namespace sys {
         }
         export namespace StaticTools {
             export class Any {
-                public static equals(val1: any, val2: any) {
+                public static equals(val1: any, val2: any, deep: boolean) {
                     return (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
-                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2));
+                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2, deep));
                 }
             }
             export class Primitive {
