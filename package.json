@@ -30,7 +30,8 @@
   "devDependencies": {
     "@types/chai": "^3.5.2",
     "@types/mocha": "^2.2.41",
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "mocha": "^3.4.2"
   },
   "dependencies": {
     "sift": "^3.3.5"
