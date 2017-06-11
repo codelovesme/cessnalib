@@ -39,6 +39,8 @@ var js;
             return subInstance;
         };
         Class.clone = function (obj, deep) {
+            if (this.isPrimitiveType(obj))
+                return obj;
             var sub = {};
             for (var prop in obj) {
                 sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];

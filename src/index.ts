@@ -33,6 +33,7 @@ export namespace js {
             return subInstance;
         }
         public static clone<T extends any>(obj: T, deep: boolean): T {
+            if(this.isPrimitiveType(obj)) return obj;
             var sub: any = {};
             for (var prop in obj) {
                 sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
