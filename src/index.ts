@@ -221,12 +221,19 @@ export namespace sys {
             className: string = "sys.type.Clock";
             constructor(public hour: number, public minute: number, public second: number) { }
         }
+        export type Primitive = string | number | boolean | undefined | null | symbol;
         export namespace reference {
             export const Exception = new sys.type.Exception("Exception", null);
         }
         export namespace StaticTools {
-            export class Primitive {
+            export class Any {
                 public static equals(val1: any, val2: any) {
+                    return (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
+                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2));
+                }
+            }
+            export class Primitive {
+                public static equals(val1: Primitive, val2: Primitive) {
                     return val1 === val2;
                 }
             }

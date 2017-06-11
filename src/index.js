@@ -286,6 +286,16 @@ var sys;
         })(reference = type.reference || (type.reference = {}));
         var StaticTools;
         (function (StaticTools) {
+            var Any = (function () {
+                function Any() {
+                }
+                Any.equals = function (val1, val2) {
+                    return (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
+                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2));
+                };
+                return Any;
+            }());
+            StaticTools.Any = Any;
             var Primitive = (function () {
                 function Primitive() {
                 }

@@ -96,12 +96,16 @@ export declare namespace sys {
             className: string;
             constructor(hour: number, minute: number, second: number);
         }
+        type Primitive = string | number | boolean | undefined | null | symbol;
         namespace reference {
             const Exception: Exception;
         }
         namespace StaticTools {
-            class Primitive {
+            class Any {
                 static equals(val1: any, val2: any): boolean;
+            }
+            class Primitive {
+                static equals(val1: Primitive, val2: Primitive): boolean;
             }
             class Object {
                 static equals(obj1: any, obj2: any, deep?: boolean): boolean;
