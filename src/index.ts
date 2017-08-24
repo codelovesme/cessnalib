@@ -116,7 +116,7 @@ export namespace js {
             return true;
         }
         public static doesMongoCover(obj: any, query: any): boolean {
-            let array = sift(query, [obj]);
+            let array = sift.default(query, [obj]);
             return array instanceof Array && array.length > 0;
         }
     }
@@ -213,6 +213,10 @@ export namespace sys {
         export interface Named {
             name: string;
         }
+        export class Point2D {
+            className: string = "sys.type.Point2D";
+            constructor(public x: number, public y: number) { }
+        }
         export class TimeSpan {
             className: string = "sys.type.TimeSpan";
             constructor(public days: number, public hours: number, public minutes: number, public seconds: number, public miliseconds: number) { }
@@ -234,6 +238,11 @@ export namespace sys {
             export const Exception = new sys.type.Exception("Exception", null);
         }
         export namespace StaticTools {
+            export class Point2D {
+                public static distance(point1: type.Point2D, point2: type.Point2D) {
+                    return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+                }
+            }
             export class Any {
                 public static equals(val1: any, val2: any, deep: boolean) {
                     return (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||

@@ -137,7 +137,7 @@ var js;
             return true;
         };
         Class.doesMongoCover = function (obj, query) {
-            var array = sift(query, [obj]);
+            var array = sift.default(query, [obj]);
             return array instanceof Array && array.length > 0;
         };
         return Class;
@@ -249,6 +249,15 @@ var sys;
             return Map;
         }());
         type.Map = Map;
+        var Point2D = (function () {
+            function Point2D(x, y) {
+                this.x = x;
+                this.y = y;
+                this.className = "sys.type.Point2D";
+            }
+            return Point2D;
+        }());
+        type.Point2D = Point2D;
         var TimeSpan = (function () {
             function TimeSpan(days, hours, minutes, seconds, miliseconds) {
                 this.days = days;
@@ -296,6 +305,15 @@ var sys;
         })(reference = type.reference || (type.reference = {}));
         var StaticTools;
         (function (StaticTools) {
+            var Point2D = (function () {
+                function Point2D() {
+                }
+                Point2D.distance = function (point1, point2) {
+                    return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+                };
+                return Point2D;
+            }());
+            StaticTools.Point2D = Point2D;
             var Any = (function () {
                 function Any() {
                 }
@@ -621,4 +639,3 @@ var sys;
         })(StaticTools = type.StaticTools || (type.StaticTools = {}));
     })(type = sys.type || (sys.type = {}));
 })(sys = exports.sys || (exports.sys = {}));
-//# sourceMappingURL=index.js.map
