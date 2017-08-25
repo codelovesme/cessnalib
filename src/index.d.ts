@@ -67,6 +67,12 @@ export declare namespace sys {
         interface Named {
             name: string;
         }
+        class Point2D {
+            x: number;
+            y: number;
+            className: string;
+            constructor(x: number, y: number);
+        }
         class TimeSpan {
             days: number;
             hours: number;
@@ -101,6 +107,9 @@ export declare namespace sys {
             const Exception: Exception;
         }
         namespace StaticTools {
+            class Point2D {
+                static distance(point1: type.Point2D, point2: type.Point2D): number;
+            }
             class Any {
                 static equals(val1: any, val2: any, deep: boolean): boolean;
             }
