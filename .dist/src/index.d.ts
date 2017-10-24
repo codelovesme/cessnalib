@@ -4,7 +4,7 @@ export declare namespace js {
     class Class {
         static toDotNotation(obj: Object): any;
         static clean(obj: Object): void;
-        static extend(subInstance: any, parentInstance: any): void;
+        static extend(subInstance: any, parentInstance: any): any;
         static clone<T extends any>(obj: T, deep: boolean): T;
         static merge(primaryInstance: any, secondaryInstance: any): any;
         static patch(source: any, patch: any): any;

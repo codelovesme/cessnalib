@@ -26,7 +26,7 @@ export namespace js {
         public static clean(obj: Object): void {
             delete (obj as any).__proto__;
         }
-        public static extend(subInstance: any, parentInstance: any): void {
+        public static extend(subInstance: any, parentInstance: any): any {
             for (let prop in parentInstance) {
                 if (!subInstance[prop]) subInstance[prop] = parentInstance[prop];
             }
@@ -76,7 +76,7 @@ export namespace js {
             var propToValuefy: any = null;
             for (var prop in instance) {
                 if ("function" !== typeof instance[prop]) {
-                    valueObj[prop] = instance[prop];
+                    valueObj[prop] = instance[prop]; 
                 } else if (typeof instance[prop] === "object") {
                     valueObj[prop] = Class.valuefy(instance[prop]);
                 } else if ((prop.substring(0, 3) === "get") && (propToValuefy = prop.substring(3, prop.length))) {
@@ -256,6 +256,12 @@ export namespace sys {
             }
             export class Object {
                 public static equals(obj1: any, obj2: any, deep?: boolean) {
+                    if(!obj1 && !obj2){
+                        return true;
+                    }
+                    if(!obj1 || !obj2){
+                        return false;
+                    }
                     let obj1keys = JavascriptObject.keys(obj1);
                     let obj2keys = JavascriptObject.keys(obj2);
                     if (!Array.equals(obj1keys, obj2keys)) return false;

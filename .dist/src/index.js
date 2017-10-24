@@ -5,7 +5,7 @@ exports.JavascriptDate = Date;
 exports.JavascriptObject = Object;
 var js;
 (function (js) {
-    var Class = (function () {
+    var Class = /** @class */ (function () {
         function Class() {
         }
         Class.toDotNotation = function (obj) {
@@ -146,7 +146,7 @@ var js;
 })(js = exports.js || (exports.js = {}));
 var injection;
 (function (injection) {
-    var StaticTools = (function () {
+    var StaticTools = /** @class */ (function () {
         function StaticTools() {
         }
         StaticTools.valueOfValueChooser = function (valueChooser) {
@@ -155,20 +155,20 @@ var injection;
         return StaticTools;
     }());
     injection.StaticTools = StaticTools;
-    var Configuration = (function () {
+    var Configuration = /** @class */ (function () {
         function Configuration() {
         }
         return Configuration;
     }());
     injection.Configuration = Configuration;
-    var ValueChooser = (function () {
+    var ValueChooser = /** @class */ (function () {
         function ValueChooser() {
             this.index = 0;
         }
         return ValueChooser;
     }());
     injection.ValueChooser = ValueChooser;
-    var ObjectChooser = (function () {
+    var ObjectChooser = /** @class */ (function () {
         function ObjectChooser() {
         }
         return ObjectChooser;
@@ -179,7 +179,7 @@ var sys;
 (function (sys) {
     var type;
     (function (type) {
-        var Exception = (function () {
+        var Exception = /** @class */ (function () {
             function Exception(message, innerException) {
                 this.message = message;
                 this.innerException = innerException;
@@ -187,7 +187,7 @@ var sys;
             return Exception;
         }());
         type.Exception = Exception;
-        var Map = (function () {
+        var Map = /** @class */ (function () {
             function Map(compareKeys) {
                 this.compareKeys = compareKeys;
                 this.keys = new Array();
@@ -249,7 +249,7 @@ var sys;
             return Map;
         }());
         type.Map = Map;
-        var Point2D = (function () {
+        var Point2D = /** @class */ (function () {
             function Point2D(x, y) {
                 this.x = x;
                 this.y = y;
@@ -258,7 +258,7 @@ var sys;
             return Point2D;
         }());
         type.Point2D = Point2D;
-        var TimeSpan = (function () {
+        var TimeSpan = /** @class */ (function () {
             function TimeSpan(days, hours, minutes, seconds, miliseconds) {
                 this.days = days;
                 this.hours = hours;
@@ -270,7 +270,7 @@ var sys;
             return TimeSpan;
         }());
         type.TimeSpan = TimeSpan;
-        var Time = (function () {
+        var Time = /** @class */ (function () {
             function Time(date, clock) {
                 this.date = date;
                 this.clock = clock;
@@ -279,7 +279,7 @@ var sys;
             return Time;
         }());
         type.Time = Time;
-        var Date = (function () {
+        var Date = /** @class */ (function () {
             function Date(year, month, day) {
                 this.year = year;
                 this.month = month;
@@ -289,7 +289,7 @@ var sys;
             return Date;
         }());
         type.Date = Date;
-        var Clock = (function () {
+        var Clock = /** @class */ (function () {
             function Clock(hour, minute, second) {
                 this.hour = hour;
                 this.minute = minute;
@@ -305,7 +305,7 @@ var sys;
         })(reference = type.reference || (type.reference = {}));
         var StaticTools;
         (function (StaticTools) {
-            var Point2D = (function () {
+            var Point2D = /** @class */ (function () {
                 function Point2D() {
                 }
                 Point2D.distance = function (point1, point2) {
@@ -314,7 +314,7 @@ var sys;
                 return Point2D;
             }());
             StaticTools.Point2D = Point2D;
-            var Any = (function () {
+            var Any = /** @class */ (function () {
                 function Any() {
                 }
                 Any.equals = function (val1, val2, deep) {
@@ -324,7 +324,7 @@ var sys;
                 return Any;
             }());
             StaticTools.Any = Any;
-            var Primitive = (function () {
+            var Primitive = /** @class */ (function () {
                 function Primitive() {
                 }
                 Primitive.equals = function (val1, val2) {
@@ -333,10 +333,16 @@ var sys;
                 return Primitive;
             }());
             StaticTools.Primitive = Primitive;
-            var Object = (function () {
+            var Object = /** @class */ (function () {
                 function Object() {
                 }
                 Object.equals = function (obj1, obj2, deep) {
+                    if (!obj1 && !obj2) {
+                        return true;
+                    }
+                    if (!obj1 || !obj2) {
+                        return false;
+                    }
                     var obj1keys = exports.JavascriptObject.keys(obj1);
                     var obj2keys = exports.JavascriptObject.keys(obj2);
                     if (!Array.equals(obj1keys, obj2keys))
@@ -368,7 +374,7 @@ var sys;
                 return Object;
             }());
             StaticTools.Object = Object;
-            var Exception = (function () {
+            var Exception = /** @class */ (function () {
                 function Exception() {
                 }
                 Exception.isNotException = function (t) {
@@ -377,7 +383,7 @@ var sys;
                 return Exception;
             }());
             StaticTools.Exception = Exception;
-            var UUID = (function () {
+            var UUID = /** @class */ (function () {
                 function UUID() {
                 }
                 UUID.generate = function () {
@@ -392,7 +398,7 @@ var sys;
                 return UUID;
             }());
             StaticTools.UUID = UUID;
-            var TimeSpan = (function () {
+            var TimeSpan = /** @class */ (function () {
                 function TimeSpan() {
                 }
                 TimeSpan.fromUnixTimestamp = function (timestamp) {
@@ -418,7 +424,7 @@ var sys;
                 return TimeSpan;
             }());
             StaticTools.TimeSpan = TimeSpan;
-            var Time = (function () {
+            var Time = /** @class */ (function () {
                 function Time() {
                 }
                 Time.biggerThan = function (time1, time2) {
@@ -468,7 +474,7 @@ var sys;
                 return Time;
             }());
             StaticTools.Time = Time;
-            var Date = (function () {
+            var Date = /** @class */ (function () {
                 function Date() {
                 }
                 Date.equals = function (date1, date2) {
@@ -484,7 +490,7 @@ var sys;
                 return Date;
             }());
             StaticTools.Date = Date;
-            var Clock = (function () {
+            var Clock = /** @class */ (function () {
                 function Clock() {
                 }
                 Clock.equals = function (clock1, clock2) {
@@ -500,7 +506,7 @@ var sys;
                 return Clock;
             }());
             StaticTools.Clock = Clock;
-            var Array = (function () {
+            var Array = /** @class */ (function () {
                 function Array() {
                 }
                 Array.orderBy = function (array, compare) {
@@ -639,3 +645,5 @@ var sys;
         })(StaticTools = type.StaticTools || (type.StaticTools = {}));
     })(type = sys.type || (sys.type = {}));
 })(sys = exports.sys || (exports.sys = {}));
+
+//# sourceMappingURL=index.js.map

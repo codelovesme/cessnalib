@@ -288,4 +288,5 @@ describe("euglena", function () {
         });
     });
 });
+
 //# sourceMappingURL=index.js.map
