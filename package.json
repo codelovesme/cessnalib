@@ -2,11 +2,11 @@
   "name": "cessnalib",
   "version": "0.4.3",
   "description": "",
-  "main": ".dist/index.js",
+  "main": ".dist/src/index.js",
   "directories": {
     "test": "test"
   },
-  "typings": ".dist/index.d.ts",
+  "typings": ".dist/src/index.d.ts",
   "scripts": {
     "test": "gulp test",
     "build": "gulp build",
