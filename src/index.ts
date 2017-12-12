@@ -493,6 +493,16 @@ export namespace sys {
                         }
                     }
                 }
+                public static getMatched<T, K>(array: T[], k: K, compare = (arrayItem: T, t: K) => (arrayItem as any) === t): T {
+                    let ret;
+                    for (let i = 0; i < array.length; i++) {
+                        if (compare(array[i], k)) {
+                            ret = array[i];
+                            break;
+                        }
+                    }
+                    return ret;
+                }
                 public static getAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
                     let returnValue: T[] = [];
                     if (compare) {

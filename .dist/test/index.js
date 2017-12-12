@@ -319,6 +319,17 @@ describe("cessnalib", function () {
                             chai.expect(result).equals(556);
                         });
                     });
+                    describe("getMatched", function () {
+                        it("should return matched first element", function () {
+                            //given
+                            var array = [{ a: 12, c: 3 }, { a: 45, c: 0 }, { a: 12, c: 4 }];
+                            //when
+                            var result = StaticTools.Array.getMatched(array, { a: 12 }, function (tt, t) { return tt.a === t.a; });
+                            //then 
+                            chai.expect(result).not.null;
+                            chai.expect(result.c).equals(3);
+                        });
+                    });
                 });
             });
         });

@@ -615,6 +615,17 @@ var sys;
                         }
                     }
                 };
+                Array.getMatched = function (array, k, compare) {
+                    if (compare === void 0) { compare = function (arrayItem, t) { return arrayItem === t; }; }
+                    var ret;
+                    for (var i = 0; i < array.length; i++) {
+                        if (compare(array[i], k)) {
+                            ret = array[i];
+                            break;
+                        }
+                    }
+                    return ret;
+                };
                 Array.getAllMatched = function (array, k, compare) {
                     var returnValue = [];
                     if (compare) {

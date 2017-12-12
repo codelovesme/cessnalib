@@ -312,14 +312,25 @@ describe("cessnalib", () => {
                             chai.expect(result).has.length(2);
                         })
                     })
-                    describe("lastElement",()=>{
-                        it("should return last element of given array",()=>{
+                    describe("lastElement", () => {
+                        it("should return last element of given array", () => {
                             //given
-                            let array = [232,323,2323,232,323,2,546,56,5667567,556];
+                            let array = [232, 323, 2323, 232, 323, 2, 546, 56, 5667567, 556];
                             //when
                             let result = StaticTools.Array.lastElement(array);
                             //then 
                             chai.expect(result).equals(556);
+                        })
+                    })
+                    describe("getMatched", () => {
+                        it("should return matched first element", () => {
+                            //given
+                            let array = [{ a: 12, c: 3 }, { a: 45, c: 0 }, { a: 12, c: 4 }];
+                            //when
+                            let result = StaticTools.Array.getMatched(array, { a: 12 }, (tt, t) => tt.a === t.a);
+                            //then 
+                            chai.expect(result).not.null;
+                            chai.expect(result.c).equals(3)
                         })
                     })
                 })
