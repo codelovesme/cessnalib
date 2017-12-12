@@ -309,6 +309,16 @@ describe("cessnalib", function () {
                             chai.expect(result).has.length(2);
                         });
                     });
+                    describe("lastElement", function () {
+                        it("should return last element of given array", function () {
+                            //given
+                            var array = [232, 323, 2323, 232, 323, 2, 546, 56, 5667567, 556];
+                            //when
+                            var result = StaticTools.Array.lastElement(array);
+                            //then 
+                            chai.expect(result).equals(556);
+                        });
+                    });
                 });
             });
         });

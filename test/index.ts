@@ -312,6 +312,16 @@ describe("cessnalib", () => {
                             chai.expect(result).has.length(2);
                         })
                     })
+                    describe("lastElement",()=>{
+                        it("should return last element of given array",()=>{
+                            //given
+                            let array = [232,323,2323,232,323,2,546,56,5667567,556];
+                            //when
+                            let result = StaticTools.Array.lastElement(array);
+                            //then 
+                            chai.expect(result).equals(556);
+                        })
+                    })
                 })
             })
         })

@@ -399,10 +399,13 @@ export namespace sys {
                 }
             }
             export class Array {
+                public static lastElement<T>(array: T[]) {
+                    return array[array.length - 1];
+                }
                 public static unifySameItems<T>(array: T[], compare = (t1: T, t2: T) => t1 === t2) {
                     let ret: T[] = [];
-                    for(let item of array){
-                        if(!sys.type.StaticTools.Array.contains(ret,item,compare)){
+                    for (let item of array) {
+                        if (!sys.type.StaticTools.Array.contains(ret, item, compare)) {
                             ret.push(item);
                         }
                     }
@@ -508,7 +511,7 @@ export namespace sys {
                     return returnValue;
                 }
                 public static removeAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
-                    let returnValue: T[] = []; 
+                    let returnValue: T[] = [];
                     if (compare) {
                         for (let i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {

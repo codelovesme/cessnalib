@@ -509,6 +509,9 @@ var sys;
             var Array = /** @class */ (function () {
                 function Array() {
                 }
+                Array.lastElement = function (array) {
+                    return array[array.length - 1];
+                };
                 Array.unifySameItems = function (array, compare) {
                     if (compare === void 0) { compare = function (t1, t2) { return t1 === t2; }; }
                     var ret = [];

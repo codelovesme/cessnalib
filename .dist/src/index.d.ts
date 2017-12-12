@@ -151,6 +151,7 @@ export declare namespace sys {
                 static biggerThan(clock1: sys.type.Clock, clock2: sys.type.Clock): boolean;
             }
             class Array {
+                static lastElement<T>(array: T[]): T;
                 static unifySameItems<T>(array: T[], compare?: (t1: T, t2: T) => boolean): T[];
                 static orderBy<T>(array: T[], compare?: (t1: T, t2: T) => boolean): void;
                 static swap<T>(array: T[], index1: number, index2: number): void;
