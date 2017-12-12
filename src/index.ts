@@ -76,7 +76,7 @@ export namespace js {
             var propToValuefy: any = null;
             for (var prop in instance) {
                 if ("function" !== typeof instance[prop]) {
-                    valueObj[prop] = instance[prop]; 
+                    valueObj[prop] = instance[prop];
                 } else if (typeof instance[prop] === "object") {
                     valueObj[prop] = Class.valuefy(instance[prop]);
                 } else if ((prop.substring(0, 3) === "get") && (propToValuefy = prop.substring(3, prop.length))) {
@@ -256,10 +256,10 @@ export namespace sys {
             }
             export class Object {
                 public static equals(obj1: any, obj2: any, deep?: boolean) {
-                    if(!obj1 && !obj2){
+                    if (!obj1 && !obj2) {
                         return true;
                     }
-                    if(!obj1 || !obj2){
+                    if (!obj1 || !obj2) {
                         return false;
                     }
                     let obj1keys = JavascriptObject.keys(obj1);
@@ -399,6 +399,15 @@ export namespace sys {
                 }
             }
             export class Array {
+                public static unifySameItems<T>(array: T[], compare = (t1: T, t2: T) => t1 === t2) {
+                    let ret: T[] = [];
+                    for(let item of array){
+                        if(!sys.type.StaticTools.Array.contains(ret,item,compare)){
+                            ret.push(item);
+                        }
+                    }
+                    return ret;
+                }
                 public static orderBy<T>(array: T[], compare?: (t1: T, t2: T) => boolean) {
                     for (let i = 0; i < array.length - 1; i++) {
                         for (let j = i + 1; j < array.length; j++) {
@@ -499,7 +508,7 @@ export namespace sys {
                     return returnValue;
                 }
                 public static removeAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
-                    let returnValue: T[] = [];
+                    let returnValue: T[] = []; 
                     if (compare) {
                         for (let i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {

@@ -8,7 +8,7 @@ import * as chai from "chai";
 import Class = js.Class;
 import StaticTools = sys.type.StaticTools;
 
-describe("euglena", () => {
+describe("cessnalib", () => {
     describe("js", () => {
         describe("Class", () => {
             describe("equals", () => {
@@ -290,4 +290,30 @@ describe("euglena", () => {
             });
         });
     });
+    describe("sys", () => {
+        describe("type", () => {
+            describe("StaticTools", () => {
+                describe("Array", () => {
+                    describe("unifySameItems", () => {
+                        it("should unify added same items in the array, return a simple array with no duplicated values", () => {
+                            //given
+                            let array = [1, 2, 3, 4, 2, 3, 3, 4, 5, 7, 8, 5, 4, 3, 3, 5, 7, 8, 9, 3, 0];
+                            //when
+                            let result = StaticTools.Array.unifySameItems(array);
+                            //then
+                            chai.expect(result).has.length(9);
+                        })
+                        it("should unify added same items in the array, return a simple array with no duplicated values", () => {
+                            //given
+                            let array = [{ a: 12 }, { a: 45 }, { a: 12 }];
+                            //when
+                            let result = StaticTools.Array.unifySameItems(array, (tt, t) => tt.a === t.a);
+                            //then
+                            chai.expect(result).has.length(2);
+                        })
+                    })
+                })
+            })
+        })
+    })
 });

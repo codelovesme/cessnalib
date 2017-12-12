@@ -509,6 +509,17 @@ var sys;
             var Array = /** @class */ (function () {
                 function Array() {
                 }
+                Array.unifySameItems = function (array, compare) {
+                    if (compare === void 0) { compare = function (t1, t2) { return t1 === t2; }; }
+                    var ret = [];
+                    for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
+                        var item = array_1[_i];
+                        if (!sys.type.StaticTools.Array.contains(ret, item, compare)) {
+                            ret.push(item);
+                        }
+                    }
+                    return ret;
+                };
                 Array.orderBy = function (array, compare) {
                     for (var i = 0; i < array.length - 1; i++) {
                         for (var j = i + 1; j < array.length; j++) {

@@ -7,7 +7,7 @@ var index_1 = require("../src/index");
 var chai = require("chai");
 var Class = index_1.js.Class;
 var StaticTools = index_1.sys.type.StaticTools;
-describe("euglena", function () {
+describe("cessnalib", function () {
     describe("js", function () {
         describe("Class", function () {
             describe("equals", function () {
@@ -283,6 +283,32 @@ describe("euglena", function () {
                     var result = index_1.js.Class.doesMongoCover(obj2, obj1);
                     //then
                     chai.expect(result).to.be.true;
+                });
+            });
+        });
+    });
+    describe("sys", function () {
+        describe("type", function () {
+            describe("StaticTools", function () {
+                describe("Array", function () {
+                    describe("unifySameItems", function () {
+                        it("should unify added same items in the array, return a simple array with no duplicated values", function () {
+                            //given
+                            var array = [1, 2, 3, 4, 2, 3, 3, 4, 5, 7, 8, 5, 4, 3, 3, 5, 7, 8, 9, 3, 0];
+                            //when
+                            var result = StaticTools.Array.unifySameItems(array);
+                            //then
+                            chai.expect(result).has.length(9);
+                        });
+                        it("should unify added same items in the array, return a simple array with no duplicated values", function () {
+                            //given
+                            var array = [{ a: 12 }, { a: 45 }, { a: 12 }];
+                            //when
+                            var result = StaticTools.Array.unifySameItems(array, function (tt, t) { return tt.a === t.a; });
+                            //then
+                            chai.expect(result).has.length(2);
+                        });
+                    });
                 });
             });
         });
