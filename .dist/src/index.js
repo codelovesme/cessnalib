@@ -52,7 +52,7 @@ var js;
             else {
                 var sub = {};
                 for (var prop in obj) {
-                    sub[prop] = (deep && ('object' === typeof obj[prop])) ? Class.clone(obj[prop], true) : obj[prop];
+                    sub[prop] = deep && "object" === typeof obj[prop] ? Class.clone(obj[prop], true) : obj[prop];
                 }
                 return sub;
             }
@@ -78,7 +78,7 @@ var js;
         };
         Class.classify = function (emptyInstance, valueObj) {
             for (var prop in emptyInstance) {
-                if (("function" !== typeof emptyInstance[prop]) && !emptyInstance[prop])
+                if ("function" !== typeof emptyInstance[prop] && !emptyInstance[prop])
                     emptyInstance[prop] = valueObj[prop];
             }
             return emptyInstance;
@@ -93,19 +93,14 @@ var js;
                 else if (typeof instance[prop] === "object") {
                     valueObj[prop] = Class.valuefy(instance[prop]);
                 }
-                else if ((prop.substring(0, 3) === "get") && (propToValuefy = prop.substring(3, prop.length))) {
+                else if (prop.substring(0, 3) === "get" && (propToValuefy = prop.substring(3, prop.length))) {
                     valueObj[propToValuefy[0].toLowerCase() + propToValuefy.substring(1, propToValuefy.length)] = instance[prop]();
                 }
             }
             return valueObj;
         };
         Class.isPrimitiveType = function (obj) {
-            return typeof obj === "string" ||
-                typeof obj === "number" ||
-                typeof obj === "boolean" ||
-                obj === undefined ||
-                obj === null ||
-                typeof obj === "symbol";
+            return typeof obj === "string" || typeof obj === "number" || typeof obj === "boolean" || obj === undefined || obj === null || typeof obj === "symbol";
         };
         Class.instanceOf = function (referenceObject, obj) {
             if (obj === null || obj === undefined)
@@ -179,6 +174,23 @@ var sys;
 (function (sys) {
     var type;
     (function (type) {
+        var Observable = /** @class */ (function () {
+            function Observable(run) {
+                var _this = this;
+                this.listeners = [];
+                run(function (data) {
+                    for (var _i = 0, _a = _this.listeners; _i < _a.length; _i++) {
+                        var listener = _a[_i];
+                        listener(data);
+                    }
+                });
+            }
+            Observable.prototype.subscribe = function (callback) {
+                this.listeners.push(callback);
+            };
+            return Observable;
+        }());
+        type.Observable = Observable;
         var Exception = /** @class */ (function () {
             function Exception(message, innerException) {
                 this.message = message;
@@ -318,8 +330,8 @@ var sys;
                 function Any() {
                 }
                 Any.equals = function (val1, val2, deep) {
-                    return (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
-                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2, deep));
+                    return ((js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
+                        (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2, deep)));
                 };
                 return Any;
             }());
@@ -392,8 +404,7 @@ var sys;
                             .toString(16)
                             .substring(1);
                     }
-                    return word() + word() + '-' + word() + '-' + word() + '-' +
-                        word() + '-' + word() + word() + word();
+                    return word() + word() + "-" + word() + "-" + word() + "-" + word() + "-" + word() + word() + word();
                 };
                 return UUID;
             }());
@@ -428,9 +439,7 @@ var sys;
                 function Time() {
                 }
                 Time.biggerThan = function (time1, time2) {
-                    return Date.biggerThan(time1.date, time2.date) ? true :
-                        Date.biggerThan(time1.date, time2.date) ? false :
-                            Clock.biggerThan(time1.clock, time2.clock);
+                    return Date.biggerThan(time1.date, time2.date) ? true : Date.biggerThan(time1.date, time2.date) ? false : Clock.biggerThan(time1.clock, time2.clock);
                 };
                 Time.equals = function (time1, time2) {
                     return Date.equals(time1.date, time2.date) && Clock.equals(time1.clock, time2.clock);
@@ -478,14 +487,10 @@ var sys;
                 function Date() {
                 }
                 Date.equals = function (date1, date2) {
-                    return date1.year == date2.year &&
-                        date1.month == date2.month &&
-                        date1.day == date2.day;
+                    return date1.year == date2.year && date1.month == date2.month && date1.day == date2.day;
                 };
                 Date.biggerThan = function (date1, date2) {
-                    return date1.year > date2.year ? true : date1.year < date2.year ? false :
-                        date1.month > date2.month ? true : date1.month < date2.month ? false :
-                            date1.day > date2.day;
+                    return date1.year > date2.year ? true : date1.year < date2.year ? false : date1.month > date2.month ? true : date1.month < date2.month ? false : date1.day > date2.day;
                 };
                 return Date;
             }());
@@ -494,14 +499,10 @@ var sys;
                 function Clock() {
                 }
                 Clock.equals = function (clock1, clock2) {
-                    return clock1.hour == clock2.hour &&
-                        clock1.minute == clock2.minute &&
-                        clock1.second == clock2.second;
+                    return clock1.hour == clock2.hour && clock1.minute == clock2.minute && clock1.second == clock2.second;
                 };
                 Clock.biggerThan = function (clock1, clock2) {
-                    return clock1.hour > clock2.hour ? true : clock1.hour < clock2.hour ? false :
-                        clock1.minute > clock2.minute ? true : clock1.minute < clock2.minute ? false :
-                            clock1.second > clock2.second;
+                    return clock1.hour > clock2.hour ? true : clock1.hour < clock2.hour ? false : clock1.minute > clock2.minute ? true : clock1.minute < clock2.minute ? false : clock1.second > clock2.second;
                 };
                 return Clock;
             }());

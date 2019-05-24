@@ -36,13 +36,18 @@ export declare namespace injection {
 }
 export declare namespace sys {
     namespace type {
+        class Observable<T> {
+            private listeners;
+            constructor(run: (publish: (data: T) => void) => void);
+            subscribe(callback: Callback<T>): void;
+        }
         class Exception {
             message: string;
-            innerException: Exception;
+            innerException?: Exception;
             constructor(message: string, innerException?: Exception);
         }
         class Map<K, V> {
-            private compareKeys;
+            private compareKeys?;
             private keys;
             private values;
             constructor(compareKeys?: (key1: K, key2: K) => boolean);
