@@ -36,6 +36,9 @@ export declare namespace injection {
 }
 export declare namespace sys {
     namespace type {
+        type RecursivePartial<T> = {
+            [P in keyof T]?: T[P] extends (infer U)[] ? RecursivePartial<U>[] : T[P] extends object ? RecursivePartial<T[P]> : T[P];
+        };
         class Observable<T> {
             private listeners;
             constructor(run: (publish: (data: T) => void) => void);
