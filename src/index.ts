@@ -1,10 +1,9 @@
 import * as sift from "sift";
 export const JavascriptDate = Date;
-export const JavascriptObject = Object;
 
 export namespace js {
   export class Class {
-    public static toDotNotation(obj: Object) {
+    public static toDotNotation(obj: object) {
       let obj_ = obj as any;
       //check if obj is object or not
       if (!obj && typeof obj !== "object") return obj;
@@ -22,7 +21,7 @@ export namespace js {
       }
       return ret_;
     }
-    public static clean(obj: Object): void {
+    public static clean(obj: object): void {
       delete (obj as any).__proto__;
     }
     public static extend(subInstance: any, parentInstance: any): any {
@@ -307,7 +306,7 @@ export namespace sys {
               Primitive.equals(val1, val2)) ||
             (!js.Class.isPrimitiveType(val1) &&
               !js.Class.isPrimitiveType(val2) &&
-              Object.equals(val1, val2, deep))
+              Obj.equals(val1, val2, deep))
           );
         }
       }
@@ -316,7 +315,7 @@ export namespace sys {
           return val1 === val2;
         }
       }
-      export class Object {
+      export class Obj {
         public static equals(obj1: any, obj2: any, deep?: boolean) {
           if (!obj1 && !obj2) {
             return true;
@@ -324,14 +323,14 @@ export namespace sys {
           if (!obj1 || !obj2) {
             return false;
           }
-          let obj1keys = JavascriptObject.keys(obj1);
-          let obj2keys = JavascriptObject.keys(obj2);
+          let obj1keys = Object.keys(obj1);
+          let obj2keys = Object.keys(obj2);
           if (!Array.equals(obj1keys, obj2keys)) return false;
           if (obj1keys.length == 0) return true;
           if (deep) {
             for (let key of obj1keys) {
               if (typeof obj1[key] == "object") {
-                if (!Object.equals(obj1[key], obj2[key], deep)) return false;
+                if (!Obj.equals(obj1[key], obj2[key], deep)) return false;
               } else {
                 if (obj1[key] != obj2[key]) return false;
               }
