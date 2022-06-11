@@ -42,14 +42,18 @@ export namespace js {
       } else {
         var sub: any = {};
         for (var prop in obj) {
-          sub[prop] = deep && "object" === typeof obj[prop] ? Class.clone(obj[prop], true) : obj[prop];
+          sub[prop] =
+            deep && "object" === typeof obj[prop]
+              ? Class.clone(obj[prop], true)
+              : obj[prop];
         }
         return <T>sub;
       }
     }
     public static merge(primaryInstance: any, secondaryInstance: any) {
       for (var prop in secondaryInstance) {
-        if (!primaryInstance[prop]) primaryInstance[prop] = secondaryInstance[prop];
+        if (!primaryInstance[prop])
+          primaryInstance[prop] = secondaryInstance[prop];
       }
       return primaryInstance;
     }
@@ -66,7 +70,8 @@ export namespace js {
     }
     public static classify(emptyInstance: any, valueObj: any) {
       for (var prop in emptyInstance) {
-        if ("function" !== typeof emptyInstance[prop] && !emptyInstance[prop]) emptyInstance[prop] = valueObj[prop];
+        if ("function" !== typeof emptyInstance[prop] && !emptyInstance[prop])
+          emptyInstance[prop] = valueObj[prop];
       }
       return emptyInstance;
     }
@@ -78,18 +83,32 @@ export namespace js {
           valueObj[prop] = instance[prop];
         } else if (typeof instance[prop] === "object") {
           valueObj[prop] = Class.valuefy(instance[prop]);
-        } else if (prop.substring(0, 3) === "get" && (propToValuefy = prop.substring(3, prop.length))) {
-          valueObj[propToValuefy[0].toLowerCase() + propToValuefy.substring(1, propToValuefy.length)] = instance[prop]();
+        } else if (
+          prop.substring(0, 3) === "get" &&
+          (propToValuefy = prop.substring(3, prop.length))
+        ) {
+          valueObj[
+            propToValuefy[0].toLowerCase() +
+              propToValuefy.substring(1, propToValuefy.length)
+          ] = instance[prop]();
         }
       }
       return valueObj;
     }
     public static isPrimitiveType(obj: any): boolean {
-      return typeof obj === "string" || typeof obj === "number" || typeof obj === "boolean" || obj === undefined || obj === null || typeof obj === "symbol";
+      return (
+        typeof obj === "string" ||
+        typeof obj === "number" ||
+        typeof obj === "boolean" ||
+        obj === undefined ||
+        obj === null ||
+        typeof obj === "symbol"
+      );
     }
     public static instanceOf<T>(referenceObject: T, obj: any | T): obj is T {
       if (obj === null || obj === undefined) return false;
-      if (Class.isPrimitiveType(referenceObject)) return typeof referenceObject === typeof obj;
+      if (Class.isPrimitiveType(referenceObject))
+        return typeof referenceObject === typeof obj;
       for (var prop in referenceObject) {
         if (obj[prop] === undefined) return false;
       }
@@ -137,11 +156,13 @@ export namespace injection {
 export namespace sys {
   export namespace type {
     export type RecursivePartial<T> = {
-      [P in keyof T]?: T[P] extends (infer U)[]
-        ? RecursivePartial<U>[]
+      [P in keyof T]?: T[P] extends Array<infer U>
+        ? Array<RecursivePartial<U>>
+        : T[P] extends ReadonlyArray<infer U>
+        ? ReadonlyArray<RecursivePartial<U>>
         : T[P] extends object
         ? RecursivePartial<T[P]>
-        : T[P]
+        : T[P];
     };
     export class Observable<T> {
       private listeners: Callback<T>[] = [];
@@ -232,7 +253,13 @@ export namespace sys {
     }
     export class TimeSpan {
       className: string = "sys.type.TimeSpan";
-      constructor(public days: number, public hours: number, public minutes: number, public seconds: number, public miliseconds: number) {}
+      constructor(
+        public days: number,
+        public hours: number,
+        public minutes: number,
+        public seconds: number,
+        public miliseconds: number
+      ) {}
     }
     export class Time implements Classifiable {
       className: string = "sys.type.Time";
@@ -240,27 +267,47 @@ export namespace sys {
     }
     export class Date implements Classifiable {
       className: string = "sys.type.Date";
-      constructor(public year: number, public month: number, public day: number) {}
+      constructor(
+        public year: number,
+        public month: number,
+        public day: number
+      ) {}
     }
     export class Clock implements Classifiable {
       className: string = "sys.type.Clock";
-      constructor(public hour: number, public minute: number, public second: number) {}
+      constructor(
+        public hour: number,
+        public minute: number,
+        public second: number
+      ) {}
     }
-    export type Primitive = string | number | boolean | undefined | null | symbol;
+    export type Primitive =
+      | string
+      | number
+      | boolean
+      | undefined
+      | null
+      | symbol;
     export namespace reference {
       export const Exception = new sys.type.Exception("Exception", null);
     }
     export namespace StaticTools {
       export class Point2D {
         public static distance(point1: type.Point2D, point2: type.Point2D) {
-          return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+          return Math.sqrt(
+            Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2)
+          );
         }
       }
       export class Any {
         public static equals(val1: any, val2: any, deep: boolean) {
           return (
-            (js.Class.isPrimitiveType(val1) && js.Class.isPrimitiveType(val2) && Primitive.equals(val1, val2)) ||
-            (!js.Class.isPrimitiveType(val1) && !js.Class.isPrimitiveType(val2) && Object.equals(val1, val2, deep))
+            (js.Class.isPrimitiveType(val1) &&
+              js.Class.isPrimitiveType(val2) &&
+              Primitive.equals(val1, val2)) ||
+            (!js.Class.isPrimitiveType(val1) &&
+              !js.Class.isPrimitiveType(val2) &&
+              Object.equals(val1, val2, deep))
           );
         }
       }
@@ -309,7 +356,20 @@ export namespace sys {
               .toString(16)
               .substring(1);
           }
-          return word() + word() + "-" + word() + "-" + word() + "-" + word() + "-" + word() + word() + word();
+          return (
+            word() +
+            word() +
+            "-" +
+            word() +
+            "-" +
+            word() +
+            "-" +
+            word() +
+            "-" +
+            word() +
+            word() +
+            word()
+          );
         }
       }
       export class TimeSpan {
@@ -328,7 +388,13 @@ export namespace sys {
 
           var miliseconds = timestamp;
 
-          return new sys.type.TimeSpan(days, hours, minutes, seconds, miliseconds);
+          return new sys.type.TimeSpan(
+            days,
+            hours,
+            minutes,
+            seconds,
+            miliseconds
+          );
         }
         public static toUnixTimestamp(timespan: sys.type.TimeSpan): number {
           let fromdays = timespan.days * 60 * 60 * 24 * 1000;
@@ -336,27 +402,60 @@ export namespace sys {
           let fromminutes = timespan.minutes * 60 * 1000;
           let fromseconds = timespan.seconds * 1000;
           let frommiliseconds = timespan.miliseconds;
-          return fromdays + fromhours + fromminutes + fromseconds + frommiliseconds;
+          return (
+            fromdays + fromhours + fromminutes + fromseconds + frommiliseconds
+          );
         }
       }
       export class Time {
-        public static biggerThan(time1: sys.type.Time, time2: sys.type.Time): boolean {
-          return Date.biggerThan(time1.date, time2.date) ? true : Date.biggerThan(time1.date, time2.date) ? false : Clock.biggerThan(time1.clock, time2.clock);
+        public static biggerThan(
+          time1: sys.type.Time,
+          time2: sys.type.Time
+        ): boolean {
+          return Date.biggerThan(time1.date, time2.date)
+            ? true
+            : Date.biggerThan(time1.date, time2.date)
+            ? false
+            : Clock.biggerThan(time1.clock, time2.clock);
         }
-        public static equals(time1: sys.type.Time, time2: sys.type.Time): boolean {
-          return Date.equals(time1.date, time2.date) && Clock.equals(time1.clock, time2.clock);
+        public static equals(
+          time1: sys.type.Time,
+          time2: sys.type.Time
+        ): boolean {
+          return (
+            Date.equals(time1.date, time2.date) &&
+            Clock.equals(time1.clock, time2.clock)
+          );
         }
         public static now(): sys.type.Time {
           let newDate = new JavascriptDate();
           return new sys.type.Time(
-            new sys.type.Date(newDate.getUTCFullYear(), newDate.getUTCMonth() + 1, newDate.getUTCDate()),
-            new sys.type.Clock(newDate.getUTCHours(), newDate.getUTCMinutes(), newDate.getUTCSeconds())
+            new sys.type.Date(
+              newDate.getUTCFullYear(),
+              newDate.getUTCMonth() + 1,
+              newDate.getUTCDate()
+            ),
+            new sys.type.Clock(
+              newDate.getUTCHours(),
+              newDate.getUTCMinutes(),
+              newDate.getUTCSeconds()
+            )
           );
         }
-        public static addMiliseconds(time: sys.type.Time, miliseconds: number): sys.type.Time {
-          return Time.fromJavascriptDate(new JavascriptDate(Time.toJavascriptDate(time).getTime() + miliseconds));
+        public static addMiliseconds(
+          time: sys.type.Time,
+          miliseconds: number
+        ): sys.type.Time {
+          return Time.fromJavascriptDate(
+            new JavascriptDate(
+              Time.toJavascriptDate(time).getTime() + miliseconds
+            )
+          );
         }
-        public static addMinutes(time: sys.type.Time, minutes: number): sys.type.Time {
+        public static addMinutes(
+          time: sys.type.Time,
+          minutes: number
+        ): sys.type.Time {
           let miliseconds = minutes * 60000;
           return Time.addMiliseconds(time, miliseconds);
         }
@@ -374,8 +473,16 @@ export namespace sys {
         }
         public static fromJavascriptDate(date: any): sys.type.Time {
           return new sys.type.Time(
-            new sys.type.Date(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()),
-            new sys.type.Clock(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds())
+            new sys.type.Date(
+              date.getUTCFullYear(),
+              date.getUTCMonth() + 1,
+              date.getUTCDate()
+            ),
+            new sys.type.Clock(
+              date.getUTCHours(),
+              date.getUTCMinutes(),
+              date.getUTCSeconds()
+            )
           );
         }
         public static toJavascriptDate(time: sys.type.Time): any {
@@ -390,26 +497,65 @@ export namespace sys {
         }
       }
       export class Date {
-        public static equals(date1: sys.type.Date, date2: sys.type.Date): boolean {
-          return date1.year == date2.year && date1.month == date2.month && date1.day == date2.day;
+        public static equals(
+          date1: sys.type.Date,
+          date2: sys.type.Date
+        ): boolean {
+          return (
+            date1.year == date2.year &&
+            date1.month == date2.month &&
+            date1.day == date2.day
+          );
         }
-        public static biggerThan(date1: sys.type.Date, date2: sys.type.Date): boolean {
-          return date1.year > date2.year ? true : date1.year < date2.year ? false : date1.month > date2.month ? true : date1.month < date2.month ? false : date1.day > date2.day;
+        public static biggerThan(
+          date1: sys.type.Date,
+          date2: sys.type.Date
+        ): boolean {
+          return date1.year > date2.year
+            ? true
+            : date1.year < date2.year
+            ? false
+            : date1.month > date2.month
+            ? true
+            : date1.month < date2.month
+            ? false
+            : date1.day > date2.day;
         }
       }
       export class Clock {
-        public static equals(clock1: sys.type.Clock, clock2: sys.type.Clock): boolean {
-          return clock1.hour == clock2.hour && clock1.minute == clock2.minute && clock1.second == clock2.second;
+        public static equals(
+          clock1: sys.type.Clock,
+          clock2: sys.type.Clock
+        ): boolean {
+          return (
+            clock1.hour == clock2.hour &&
+            clock1.minute == clock2.minute &&
+            clock1.second == clock2.second
+          );
         }
-        public static biggerThan(clock1: sys.type.Clock, clock2: sys.type.Clock): boolean {
-          return clock1.hour > clock2.hour ? true : clock1.hour < clock2.hour ? false : clock1.minute > clock2.minute ? true : clock1.minute < clock2.minute ? false : clock1.second > clock2.second;
+        public static biggerThan(
+          clock1: sys.type.Clock,
+          clock2: sys.type.Clock
+        ): boolean {
+          return clock1.hour > clock2.hour
+            ? true
+            : clock1.hour < clock2.hour
+            ? false
+            : clock1.minute > clock2.minute
+            ? true
+            : clock1.minute < clock2.minute
+            ? false
+            : clock1.second > clock2.second;
         }
       }
       export class Array {
         public static lastElement<T>(array: T[]) {
           return array[array.length - 1];
         }
-        public static unifySameItems<T>(array: T[], compare = (t1: T, t2: T) => t1 === t2) {
+        public static unifySameItems<T>(
+          array: T[],
+          compare = (t1: T, t2: T) => t1 === t2
+        ) {
           let ret: T[] = [];
           for (let item of array) {
             if (!sys.type.StaticTools.Array.contains(ret, item, compare)) {
@@ -418,7 +564,10 @@ export namespace sys {
           }
           return ret;
         }
-        public static orderBy<T>(array: T[], compare?: (t1: T, t2: T) => boolean) {
+        public static orderBy<T>(
+          array: T[],
+          compare?: (t1: T, t2: T) => boolean
+        ) {
           for (let i = 0; i < array.length - 1; i++) {
             for (let j = i + 1; j < array.length; j++) {
               if (compare(array[i], array[j])) {
@@ -441,7 +590,11 @@ export namespace sys {
           }
           return a;
         }
-        public static equals<T, K>(array1: T[], array2: K[], compare?: (t: T, k: K) => boolean): boolean {
+        public static equals<T, K>(
+          array1: T[],
+          array2: K[],
+          compare?: (t: T, k: K) => boolean
+        ): boolean {
           if (!array1 && !array2) return true;
           if (!array1 || !array2) return false;
           if (array1.length !== array2.length) return false;
@@ -456,16 +609,28 @@ export namespace sys {
           }
           return true;
         }
-        public static contains<T, K>(array: T[], k: K, compare?: (arrayItem: T, k: K) => boolean): boolean {
+        public static contains<T, K>(
+          array: T[],
+          k: K,
+          compare?: (arrayItem: T, k: K) => boolean
+        ): boolean {
           return Array.indexOf(array, k, compare) >= 0;
         }
-        public static containsArray<T, K>(master: T[], slave: K[], compare?: (t: T, k: K) => boolean): boolean {
+        public static containsArray<T, K>(
+          master: T[],
+          slave: K[],
+          compare?: (t: T, k: K) => boolean
+        ): boolean {
           for (let s of slave) {
             if (!Array.contains(master, s, compare)) return false;
           }
           return true;
         }
-        public static indexOf<T, K>(array: T[], k: K, compare?: (arrayItem: T, k: K) => boolean): number {
+        public static indexOf<T, K>(
+          array: T[],
+          k: K,
+          compare?: (arrayItem: T, k: K) => boolean
+        ): number {
           if (compare) {
             for (var i = 0; i < array.length; i++) {
               if (compare(array[i], k)) {
@@ -484,7 +649,11 @@ export namespace sys {
         public static removeAt<T>(array: T[], index: number): T {
           return array.splice(index, 1)[0];
         }
-        public static remove<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T {
+        public static remove<T, K>(
+          array: T[],
+          k: K,
+          compare?: (arrayItem: T, t: K) => boolean
+        ): T {
           if (compare) {
             for (let i = 0; i < array.length; i++) {
               if (compare(array[i], k)) {
@@ -499,7 +668,11 @@ export namespace sys {
             }
           }
         }
-        public static getMatched<T, K>(array: T[], k: K, compare = (arrayItem: T, t: K) => (arrayItem as any) === t): T {
+        public static getMatched<T, K>(
+          array: T[],
+          k: K,
+          compare = (arrayItem: T, t: K) => (arrayItem as any) === t
+        ): T {
           let ret;
           for (let i = 0; i < array.length; i++) {
             if (compare(array[i], k)) {
@@ -509,7 +682,11 @@ export namespace sys {
           }
           return ret;
         }
-        public static getAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
+        public static getAllMatched<T, K>(
+          array: T[],
+          k: K,
+          compare?: (arrayItem: T, t: K) => boolean
+        ): T[] {
           let returnValue: T[] = [];
           if (compare) {
             for (let i = 0; i < array.length; i++) {
@@ -526,7 +703,11 @@ export namespace sys {
           }
           return returnValue;
         }
-        public static removeAllMatched<T, K>(array: T[], k: K, compare?: (arrayItem: T, t: K) => boolean): T[] {
+        public static removeAllMatched<T, K>(
+          array: T[],
+          k: K,
+          compare?: (arrayItem: T, t: K) => boolean
+        ): T[] {
           let returnValue: T[] = [];
           if (compare) {
             for (let i = 0; i < array.length; i++) {
