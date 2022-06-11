@@ -1,9 +1,8 @@
 export declare const JavascriptDate: DateConstructor;
-export declare const JavascriptObject: ObjectConstructor;
 export declare namespace js {
     class Class {
-        static toDotNotation(obj: Object): any;
-        static clean(obj: Object): void;
+        static toDotNotation(obj: object): any;
+        static clean(obj: object): void;
         static extend(subInstance: any, parentInstance: any): any;
         static clone<T extends any>(obj: T, deep: boolean): T;
         static merge(primaryInstance: any, secondaryInstance: any): any;
@@ -37,7 +36,7 @@ export declare namespace injection {
 export declare namespace sys {
     namespace type {
         type RecursivePartial<T> = {
-            [P in keyof T]?: T[P] extends (infer U)[] ? RecursivePartial<U>[] : T[P] extends object ? RecursivePartial<T[P]> : T[P];
+            [P in keyof T]?: T[P] extends Array<infer U> ? Array<RecursivePartial<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<RecursivePartial<U>> : T[P] extends object ? RecursivePartial<T[P]> : T[P];
         };
         class Observable<T> {
             private listeners;
@@ -124,7 +123,7 @@ export declare namespace sys {
             class Primitive {
                 static equals(val1: Primitive, val2: Primitive): boolean;
             }
-            class Object {
+            class Obj {
                 static equals(obj1: any, obj2: any, deep?: boolean): boolean;
             }
             class Exception {
