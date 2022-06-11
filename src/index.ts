@@ -154,6 +154,44 @@ export namespace injection {
 }
 export namespace sys {
   export namespace type {
+    export type HttpHeaderUnion =
+      | "a-im"
+      | "accept"
+      | "accept-charset"
+      | "accept-encoding"
+      | "accept-language"
+      | "accept-datetime"
+      | "access-control-request-method"
+      | "access-control-request-headers"
+      | "authorization"
+      | "cache-control"
+      | "connection"
+      | "content-length"
+      | "content-type"
+      | "cookie"
+      | "date"
+      | "expect"
+      | "forwarded"
+      | "from"
+      | "host"
+      | "if-match"
+      | "if-modified-since"
+      | "if-none-match"
+      | "if-range"
+      | "if-unmodified-since"
+      | "max-forwards"
+      | "origin"
+      | "pragma"
+      | "proxy-authorization"
+      | "range"
+      | "referer"
+      | "te"
+      | "user-agent"
+      | "upgrade"
+      | "via"
+      | "Warning";
+
+    export type Headers = { [key in HttpHeaderUnion]?: string };
     export type RecursivePartial<T> = {
       [P in keyof T]?: T[P] extends Array<infer U>
         ? Array<RecursivePartial<U>>
