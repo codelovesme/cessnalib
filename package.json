@@ -8,9 +8,14 @@
   },
   "typings": ".dist/src/index.d.ts",
   "scripts": {
-    "test": "gulp test",
-    "build": "gulp build",
-    "start": "gulp watch"
+    "compile": "tsc -p .",
+    "clean": "rm -r node_modules && rm -r dist",
+    "cleanDependencies": "rm -r node_modules",
+    "cleanDist": "rm -r dist",
+    "publishNPM": "npm publish",
+    "versionPatch": "npm version patch",
+    "versionMinor": "npm version minor",
+    "versionMajor": "npm version major"
   },
   "repository": {
     "type": "git",
@@ -18,7 +23,9 @@
   },
   "keywords": [
     "cessnalib",
-    "lib"
+    "lib",
+    "tools",
+    "utils"
   ],
   "author": {
     "name": "Fedai Kaya",
@@ -31,16 +38,10 @@
   "homepage": "https://github.com/codelovesme/cessnalib#readme",
   "devDependencies": {
     "@types/chai": "^3.5.2",
-    "@types/gulp": "^4.0.4",
     "@types/mocha": "^2.2.41",
     "chai": "^3.5.0",
-    "gulp": "^3.9.1",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-typescript": "^3.2.2",
     "mocha": "^3.4.2",
-    "typescript": "^2.4.2",
-    "gulp-mocha": "^4.3.1",
-    "merge2": "^1.2.0"
+    "typescript": "^2.4.2"
   },
   "dependencies": {
     "sift": "^3.3.5"
