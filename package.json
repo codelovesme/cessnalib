@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "private": false,
   "scripts": {
     "compile": "tsc -p .",
     "clean": "rm -r node_modules && rm -r dist",
