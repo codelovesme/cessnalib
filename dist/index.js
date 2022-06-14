@@ -1,19 +1,24 @@
-import * as sift from "sift";
-export const JavascriptDate = Date;
-export var js;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.sys = exports.injection = exports.js = exports.JavascriptDate = void 0;
+var sift = require("sift");
+exports.JavascriptDate = Date;
+var js;
 (function (js) {
-    class Class {
-        static toDotNotation(obj) {
-            let obj_ = obj;
+    var Class = /** @class */ (function () {
+        function Class() {
+        }
+        Class.toDotNotation = function (obj) {
+            var obj_ = obj;
             //check if obj is object or not
             if (!obj && typeof obj !== "object")
                 return obj;
             //if the obj terminal then return itself
-            let ret_ = {};
-            for (let key in obj) {
+            var ret_ = {};
+            for (var key in obj) {
                 if (!Class.isPrimitiveType(obj_[key])) {
-                    let r = Class.toDotNotation(obj_[key]);
-                    for (let k in r) {
+                    var r = Class.toDotNotation(obj_[key]);
+                    for (var k in r) {
                         ret_[key + "." + k] = r[k];
                     }
                 }
@@ -22,26 +27,27 @@ export var js;
                 }
             }
             return ret_;
-        }
-        static clean(obj) {
+        };
+        Class.clean = function (obj) {
             delete obj.__proto__;
-        }
-        static extend(subInstance, parentInstance) {
-            for (let prop in parentInstance) {
+        };
+        Class.extend = function (subInstance, parentInstance) {
+            for (var prop in parentInstance) {
                 if (!subInstance[prop])
                     subInstance[prop] = parentInstance[prop];
             }
             return subInstance;
-        }
-        static clone(obj, deep) {
+        };
+        Class.clone = function (obj, deep) {
             if (this.isPrimitiveType(obj))
                 return obj;
             if (obj instanceof Array) {
-                let sub = [];
-                for (let item of obj) {
-                    sub.push(Class.clone(item, true));
+                var sub_1 = [];
+                for (var _i = 0, obj_1 = obj; _i < obj_1.length; _i++) {
+                    var item = obj_1[_i];
+                    sub_1.push(Class.clone(item, true));
                 }
-                return sub;
+                return sub_1;
             }
             else {
                 var sub = {};
@@ -53,17 +59,17 @@ export var js;
                 }
                 return sub;
             }
-        }
-        static merge(primaryInstance, secondaryInstance) {
+        };
+        Class.merge = function (primaryInstance, secondaryInstance) {
             for (var prop in secondaryInstance) {
                 if (!primaryInstance[prop])
                     primaryInstance[prop] = secondaryInstance[prop];
             }
             return primaryInstance;
-        }
-        static patch(source, patch) {
-            let obj = Class.clone(source, true);
-            for (let key in patch) {
+        };
+        Class.patch = function (source, patch) {
+            var obj = Class.clone(source, true);
+            for (var key in patch) {
                 if (Class.isPrimitiveType(obj[key])) {
                     obj[key] = patch[key];
                 }
@@ -72,15 +78,15 @@ export var js;
                 }
             }
             return obj;
-        }
-        static classify(emptyInstance, valueObj) {
+        };
+        Class.classify = function (emptyInstance, valueObj) {
             for (var prop in emptyInstance) {
                 if ("function" !== typeof emptyInstance[prop] && !emptyInstance[prop])
                     emptyInstance[prop] = valueObj[prop];
             }
             return emptyInstance;
-        }
-        static valuefy(instance) {
+        };
+        Class.valuefy = function (instance) {
             var valueObj = {};
             var propToValuefy = null;
             for (var prop in instance) {
@@ -97,16 +103,16 @@ export var js;
                 }
             }
             return valueObj;
-        }
-        static isPrimitiveType(obj) {
+        };
+        Class.isPrimitiveType = function (obj) {
             return (typeof obj === "string" ||
                 typeof obj === "number" ||
                 typeof obj === "boolean" ||
                 obj === undefined ||
                 obj === null ||
                 typeof obj === "symbol");
-        }
-        static instanceOf(referenceObject, obj) {
+        };
+        Class.instanceOf = function (referenceObject, obj) {
             if (obj === null || obj === undefined)
                 return false;
             if (Class.isPrimitiveType(referenceObject))
@@ -116,10 +122,10 @@ export var js;
                     return false;
             }
             return true;
-        }
+        };
         ///TODO must be upgraded
-        static doesCover(obj1, obj2) {
-            for (let key in obj2) {
+        Class.doesCover = function (obj1, obj2) {
+            for (var key in obj2) {
                 if (obj2[key] === null || obj2[key] === undefined)
                     continue;
                 if (obj1[key] === undefined || obj1[key] === null)
@@ -134,67 +140,82 @@ export var js;
                 }
             }
             return true;
-        }
-        static doesMongoCover(obj, query) {
-            let array = sift.default(query, [obj]);
+        };
+        Class.doesMongoCover = function (obj, query) {
+            var array = sift.default(query, [obj]);
             return array instanceof Array && array.length > 0;
-        }
-    }
+        };
+        return Class;
+    }());
     js.Class = Class;
-})(js || (js = {}));
-export var injection;
+})(js = exports.js || (exports.js = {}));
+var injection;
 (function (injection) {
-    class StaticTools {
-        static valueOfValueChooser(valueChooser) {
-            return valueChooser.values[valueChooser.index];
+    var StaticTools = /** @class */ (function () {
+        function StaticTools() {
         }
-    }
+        StaticTools.valueOfValueChooser = function (valueChooser) {
+            return valueChooser.values[valueChooser.index];
+        };
+        return StaticTools;
+    }());
     injection.StaticTools = StaticTools;
-    class Configuration {
-    }
+    var Configuration = /** @class */ (function () {
+        function Configuration() {
+        }
+        return Configuration;
+    }());
     injection.Configuration = Configuration;
-    class ValueChooser {
-        constructor() {
+    var ValueChooser = /** @class */ (function () {
+        function ValueChooser() {
             this.index = 0;
         }
-    }
+        return ValueChooser;
+    }());
     injection.ValueChooser = ValueChooser;
-    class ObjectChooser {
-    }
+    var ObjectChooser = /** @class */ (function () {
+        function ObjectChooser() {
+        }
+        return ObjectChooser;
+    }());
     injection.ObjectChooser = ObjectChooser;
-})(injection || (injection = {}));
-export var sys;
+})(injection = exports.injection || (exports.injection = {}));
+var sys;
 (function (sys) {
-    let type;
+    var type;
     (function (type) {
-        class Observable {
-            constructor(run) {
+        var Observable = /** @class */ (function () {
+            function Observable(run) {
+                var _this = this;
                 this.listeners = [];
-                run((data) => {
-                    for (const listener of this.listeners) {
+                run(function (data) {
+                    for (var _i = 0, _a = _this.listeners; _i < _a.length; _i++) {
+                        var listener = _a[_i];
                         listener(data);
                     }
                 });
             }
-            subscribe(callback) {
+            Observable.prototype.subscribe = function (callback) {
                 this.listeners.push(callback);
-            }
-        }
+            };
+            return Observable;
+        }());
         type.Observable = Observable;
-        class Exception {
-            constructor(message, innerException) {
+        var Exception = /** @class */ (function () {
+            function Exception(message, innerException) {
                 this.message = message;
                 this.innerException = innerException;
             }
-        }
+            return Exception;
+        }());
         type.Exception = Exception;
-        class Map {
-            constructor(compareKeys) {
+        var Map = /** @class */ (function () {
+            function Map(compareKeys) {
                 this.compareKeys = compareKeys;
                 this.keys = new Array();
                 this.values = new Array();
             }
-            add(key, value) {
+            Map.prototype.add = function (key, value) {
                 if (!this.get(key)) {
                     this.keys.push(key);
                     this.values.push(value);
@@ -202,11 +223,11 @@ export var sys;
                 else {
                     throw "KeyAlreadyExistException";
                 }
-            }
-            keyExists(key) {
+            };
+            Map.prototype.keyExists = function (key) {
                 return this.indexOf(key) >= 0;
-            }
-            set(key, value) {
+            };
+            Map.prototype.set = function (key, value) {
                 var index = this.indexOf(key);
                 if (index >= 0) {
                     this.values[index] = value;
@@ -215,20 +236,21 @@ export var sys;
                     this.keys.push(key);
                     this.values.push(value);
                 }
-            }
-            remove(key) {
+            };
+            Map.prototype.remove = function (key) {
                 var index = this.indexOf(key);
                 if (index >= 0) {
                     this.keys.slice(index, 1);
                     this.values.slice(index, 1);
                 }
-            }
-            indexOf(key) {
-                let index = -1;
+            };
+            Map.prototype.indexOf = function (key) {
+                var _this = this;
+                var index = -1;
                 if (this.compareKeys) {
-                    this.keys.forEach((k) => {
-                        if (this.compareKeys(k, key)) {
-                            index = this.keys.indexOf(k);
+                    this.keys.forEach(function (k) {
+                        if (_this.compareKeys(k, key)) {
+                            index = _this.keys.indexOf(k);
                         }
                     });
                 }
@@ -236,28 +258,30 @@ export var sys;
                     index = this.keys.indexOf(key);
                 }
                 return index;
-            }
-            get(key) {
+            };
+            Map.prototype.get = function (key) {
                 return this.values[this.indexOf(key)];
-            }
-            getKeys() {
+            };
+            Map.prototype.getKeys = function () {
                 return this.keys;
-            }
-            getValues() {
+            };
+            Map.prototype.getValues = function () {
                 return this.values;
-            }
-        }
+            };
+            return Map;
+        }());
         type.Map = Map;
-        class Point2D {
-            constructor(x, y) {
+        var Point2D = /** @class */ (function () {
+            function Point2D(x, y) {
                 this.x = x;
                 this.y = y;
                 this.className = "sys.type.Point2D";
             }
-        }
+            return Point2D;
+        }());
         type.Point2D = Point2D;
-        class TimeSpan {
-            constructor(days, hours, minutes, seconds, miliseconds) {
+        var TimeSpan = /** @class */ (function () {
+            function TimeSpan(days, hours, minutes, seconds, miliseconds) {
                 this.days = days;
                 this.hours = hours;
                 this.minutes = minutes;
@@ -265,79 +289,95 @@ export var sys;
                 this.miliseconds = miliseconds;
                 this.className = "sys.type.TimeSpan";
             }
-        }
+            return TimeSpan;
+        }());
         type.TimeSpan = TimeSpan;
-        class Time {
-            constructor(date, clock) {
+        var Time = /** @class */ (function () {
+            function Time(date, clock) {
                 this.date = date;
                 this.clock = clock;
                 this.className = "sys.type.Time";
             }
-        }
+            return Time;
+        }());
         type.Time = Time;
-        class Date {
-            constructor(year, month, day) {
+        var Date = /** @class */ (function () {
+            function Date(year, month, day) {
                 this.year = year;
                 this.month = month;
                 this.day = day;
                 this.className = "sys.type.Date";
             }
-        }
+            return Date;
+        }());
         type.Date = Date;
-        class Clock {
-            constructor(hour, minute, second) {
+        var Clock = /** @class */ (function () {
+            function Clock(hour, minute, second) {
                 this.hour = hour;
                 this.minute = minute;
                 this.second = second;
                 this.className = "sys.type.Clock";
             }
-        }
+            return Clock;
+        }());
         type.Clock = Clock;
-        let reference;
+        var reference;
         (function (reference) {
             reference.Exception = new sys.type.Exception("Exception", null);
         })(reference = type.reference || (type.reference = {}));
-        let StaticTools;
+        var StaticTools;
         (function (StaticTools) {
-            class Point2D {
-                static distance(point1, point2) {
-                    return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+            var Point2D = /** @class */ (function () {
+                function Point2D() {
                 }
-            }
+                Point2D.distance = function (point1, point2) {
+                    return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+                };
+                return Point2D;
+            }());
             StaticTools.Point2D = Point2D;
-            class Any {
-                static equals(val1, val2, deep) {
+            var Any = /** @class */ (function () {
+                function Any() {
+                }
+                Any.equals = function (val1, val2, deep) {
                     return ((js.Class.isPrimitiveType(val1) &&
                         js.Class.isPrimitiveType(val2) &&
                         Primitive.equals(val1, val2)) ||
                         (!js.Class.isPrimitiveType(val1) &&
                             !js.Class.isPrimitiveType(val2) &&
                             Obj.equals(val1, val2, deep)));
-                }
-            }
+                };
+                return Any;
+            }());
             StaticTools.Any = Any;
-            class Primitive {
-                static equals(val1, val2) {
-                    return val1 === val2;
+            var Primitive = /** @class */ (function () {
+                function Primitive() {
                 }
-            }
+                Primitive.equals = function (val1, val2) {
+                    return val1 === val2;
+                };
+                return Primitive;
+            }());
             StaticTools.Primitive = Primitive;
-            class Obj {
-                static equals(obj1, obj2, deep) {
+            var Obj = /** @class */ (function () {
+                function Obj() {
+                }
+                Obj.equals = function (obj1, obj2, deep) {
                     if (!obj1 && !obj2) {
                         return true;
                     }
                     if (!obj1 || !obj2) {
                         return false;
                     }
-                    let obj1keys = Object.keys(obj1);
-                    let obj2keys = Object.keys(obj2);
+                    var obj1keys = Object.keys(obj1);
+                    var obj2keys = Object.keys(obj2);
                     if (!Array.equals(obj1keys, obj2keys))
                         return false;
                     if (obj1keys.length == 0)
                         return true;
                     if (deep) {
-                        for (let key of obj1keys) {
+                        for (var _i = 0, obj1keys_1 = obj1keys; _i < obj1keys_1.length; _i++) {
+                            var key = obj1keys_1[_i];
                             if (typeof obj1[key] == "object") {
                                 if (!Obj.equals(obj1[key], obj2[key], deep))
                                     return false;
@@ -349,23 +389,30 @@ export var sys;
                         }
                     }
                     else {
-                        for (let key of obj1keys) {
+                        for (var _a = 0, obj1keys_2 = obj1keys; _a < obj1keys_2.length; _a++) {
+                            var key = obj1keys_2[_a];
                             if (obj1[key] != obj2[key])
                                 return false;
                         }
                     }
                     return true;
-                }
-            }
+                };
+                return Obj;
+            }());
             StaticTools.Obj = Obj;
-            class Exception {
-                static isNotException(t) {
-                    return !js.Class.instanceOf(reference.Exception, t);
+            var Exception = /** @class */ (function () {
+                function Exception() {
                 }
-            }
+                Exception.isNotException = function (t) {
+                    return !js.Class.instanceOf(reference.Exception, t);
+                };
+                return Exception;
+            }());
             StaticTools.Exception = Exception;
-            class UUID {
-                static generate() {
+            var UUID = /** @class */ (function () {
+                function UUID() {
+                }
+                UUID.generate = function () {
                     function word() {
                         return Math.floor((1 + Math.random()) * 0x10000)
                             .toString(16)
@@ -383,11 +430,14 @@ export var sys;
                         word() +
                         word() +
                         word());
-                }
-            }
+                };
+                return UUID;
+            }());
             StaticTools.UUID = UUID;
-            class TimeSpan {
-                static fromUnixTimestamp(timestamp) {
+            var TimeSpan = /** @class */ (function () {
+                function TimeSpan() {
+                }
+                TimeSpan.fromUnixTimestamp = function (timestamp) {
                     var days = Math.floor(timestamp / (1000 * 60 * 60 * 24));
                     timestamp -= days * (1000 * 60 * 60 * 24);
                     var hours = Math.floor(timestamp / (1000 * 60 * 60));
@@ -398,57 +448,60 @@ export var sys;
                     timestamp -= seconds * 1000;
                     var miliseconds = timestamp;
                     return new sys.type.TimeSpan(days, hours, minutes, seconds, miliseconds);
-                }
-                static toUnixTimestamp(timespan) {
-                    let fromdays = timespan.days * 60 * 60 * 24 * 1000;
-                    let fromhours = timespan.hours * 60 * 60 * 1000;
-                    let fromminutes = timespan.minutes * 60 * 1000;
-                    let fromseconds = timespan.seconds * 1000;
-                    let frommiliseconds = timespan.miliseconds;
+                };
+                TimeSpan.toUnixTimestamp = function (timespan) {
+                    var fromdays = timespan.days * 60 * 60 * 24 * 1000;
+                    var fromhours = timespan.hours * 60 * 60 * 1000;
+                    var fromminutes = timespan.minutes * 60 * 1000;
+                    var fromseconds = timespan.seconds * 1000;
+                    var frommiliseconds = timespan.miliseconds;
                     return (fromdays + fromhours + fromminutes + fromseconds + frommiliseconds);
-                }
-            }
+                };
+                return TimeSpan;
+            }());
             StaticTools.TimeSpan = TimeSpan;
-            class Time {
-                static biggerThan(time1, time2) {
+            var Time = /** @class */ (function () {
+                function Time() {
+                }
+                Time.biggerThan = function (time1, time2) {
                     return Date.biggerThan(time1.date, time2.date)
                         ? true
                         : Date.biggerThan(time1.date, time2.date)
                             ? false
                             : Clock.biggerThan(time1.clock, time2.clock);
-                }
-                static equals(time1, time2) {
+                };
+                Time.equals = function (time1, time2) {
                     return (Date.equals(time1.date, time2.date) &&
                         Clock.equals(time1.clock, time2.clock));
-                }
-                static now() {
-                    let newDate = new JavascriptDate();
+                };
+                Time.now = function () {
+                    var newDate = new exports.JavascriptDate();
                     return new sys.type.Time(new sys.type.Date(newDate.getUTCFullYear(), newDate.getUTCMonth() + 1, newDate.getUTCDate()), new sys.type.Clock(newDate.getUTCHours(), newDate.getUTCMinutes(), newDate.getUTCSeconds()));
-                }
-                static addMiliseconds(time, miliseconds) {
-                    return Time.fromJavascriptDate(new JavascriptDate(Time.toJavascriptDate(time).getTime() + miliseconds));
-                }
-                static addMinutes(time, minutes) {
-                    let miliseconds = minutes * 60000;
+                };
+                Time.addMiliseconds = function (time, miliseconds) {
+                    return Time.fromJavascriptDate(new exports.JavascriptDate(Time.toJavascriptDate(time).getTime() + miliseconds));
+                };
+                Time.addMinutes = function (time, minutes) {
+                    var miliseconds = minutes * 60000;
                     return Time.addMiliseconds(time, miliseconds);
-                }
-                static DayToMiliseconds(minute) {
+                };
+                Time.DayToMiliseconds = function (minute) {
                     return minute * 86400000;
-                }
-                static HourToMiliseconds(minute) {
+                };
+                Time.HourToMiliseconds = function (minute) {
                     return minute * 3600000;
-                }
-                static MinuteToMiliseconds(minute) {
+                };
+                Time.MinuteToMiliseconds = function (minute) {
                     return minute * 60000;
-                }
-                static SecondToMiliseconds(minute) {
+                };
+                Time.SecondToMiliseconds = function (minute) {
                     return minute * 1000;
-                }
-                static fromJavascriptDate(date) {
+                };
+                Time.fromJavascriptDate = function (date) {
                     return new sys.type.Time(new sys.type.Date(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()), new sys.type.Clock(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()));
-                }
-                static toJavascriptDate(time) {
-                    let date = new JavascriptDate();
+                };
+                Time.toJavascriptDate = function (time) {
+                    var date = new exports.JavascriptDate();
                     date.setUTCFullYear(time.date.year);
                     date.setUTCMonth(time.date.month - 1);
                     date.setUTCDate(time.date.day);
@@ -456,16 +509,19 @@ export var sys;
                     date.setUTCMinutes(time.clock.minute);
                     date.setUTCSeconds(time.clock.second);
                     return date;
-                }
-            }
+                };
+                return Time;
+            }());
             StaticTools.Time = Time;
-            class Date {
-                static equals(date1, date2) {
+            var Date = /** @class */ (function () {
+                function Date() {
+                }
+                Date.equals = function (date1, date2) {
                     return (date1.year == date2.year &&
                         date1.month == date2.month &&
                         date1.day == date2.day);
-                }
-                static biggerThan(date1, date2) {
+                };
+                Date.biggerThan = function (date1, date2) {
                     return date1.year > date2.year
                         ? true
                         : date1.year < date2.year
@@ -475,16 +531,19 @@ export var sys;
                                 : date1.month < date2.month
                                     ? false
                                     : date1.day > date2.day;
-                }
-            }
+                };
+                return Date;
+            }());
             StaticTools.Date = Date;
-            class Clock {
-                static equals(clock1, clock2) {
+            var Clock = /** @class */ (function () {
+                function Clock() {
+                }
+                Clock.equals = function (clock1, clock2) {
                     return (clock1.hour == clock2.hour &&
                         clock1.minute == clock2.minute &&
                         clock1.second == clock2.second);
-                }
-                static biggerThan(clock1, clock2) {
+                };
+                Clock.biggerThan = function (clock1, clock2) {
                     return clock1.hour > clock2.hour
                         ? true
                         : clock1.hour < clock2.hour
@@ -494,38 +553,43 @@ export var sys;
                                 : clock1.minute < clock2.minute
                                     ? false
                                     : clock1.second > clock2.second;
-                }
-            }
+                };
+                return Clock;
+            }());
             StaticTools.Clock = Clock;
-            class Array {
-                static lastElement(array) {
-                    return array[array.length - 1];
+            var Array = /** @class */ (function () {
+                function Array() {
                 }
-                static unifySameItems(array, compare = (t1, t2) => t1 === t2) {
-                    let ret = [];
-                    for (let item of array) {
+                Array.lastElement = function (array) {
+                    return array[array.length - 1];
+                };
+                Array.unifySameItems = function (array, compare) {
+                    if (compare === void 0) { compare = function (t1, t2) { return t1 === t2; }; }
+                    var ret = [];
+                    for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
+                        var item = array_1[_i];
                         if (!sys.type.StaticTools.Array.contains(ret, item, compare)) {
                             ret.push(item);
                         }
                     }
                     return ret;
-                }
-                static orderBy(array, compare) {
-                    for (let i = 0; i < array.length - 1; i++) {
-                        for (let j = i + 1; j < array.length; j++) {
+                };
+                Array.orderBy = function (array, compare) {
+                    for (var i = 0; i < array.length - 1; i++) {
+                        for (var j = i + 1; j < array.length; j++) {
                             if (compare(array[i], array[j])) {
                                 Array.swap(array, i, j);
                             }
                         }
                     }
-                }
-                static swap(array, index1, index2) {
-                    let temp = array[index1];
+                };
+                Array.swap = function (array, index1, index2) {
+                    var temp = array[index1];
                     array[index1] = array[index2];
                     array[index2] = temp;
-                }
-                static combine(array1, array2) {
-                    let a = array1.concat(array2);
+                };
+                Array.combine = function (array1, array2) {
+                    var a = array1.concat(array2);
                     for (var i = 0; i < a.length; ++i) {
                         for (var j = i + 1; j < a.length; ++j) {
                             if (a[i] === a[j])
@@ -533,8 +597,8 @@ export var sys;
                         }
                     }
                     return a;
-                }
-                static equals(array1, array2, compare) {
+                };
+                Array.equals = function (array1, array2, compare) {
                     if (!array1 && !array2)
                         return true;
                     if (!array1 || !array2)
@@ -542,30 +606,31 @@ export var sys;
                     if (array1.length !== array2.length)
                         return false;
                     if (compare) {
-                        for (let i = 0; i < array1.length; i++) {
+                        for (var i = 0; i < array1.length; i++) {
                             if (!compare(array1[i], array2[i]))
                                 return false;
                         }
                     }
                     else {
-                        for (let i = 0; i < array1.length; i++) {
+                        for (var i = 0; i < array1.length; i++) {
                             if (array1[i] !== array2[i])
                                 return false;
                         }
                     }
                     return true;
-                }
-                static contains(array, k, compare) {
+                };
+                Array.contains = function (array, k, compare) {
                     return Array.indexOf(array, k, compare) >= 0;
-                }
-                static containsArray(master, slave, compare) {
-                    for (let s of slave) {
+                };
+                Array.containsArray = function (master, slave, compare) {
+                    for (var _i = 0, slave_1 = slave; _i < slave_1.length; _i++) {
+                        var s = slave_1[_i];
                         if (!Array.contains(master, s, compare))
                             return false;
                     }
                     return true;
-                }
-                static indexOf(array, k, compare) {
+                };
+                Array.indexOf = function (array, k, compare) {
                     if (compare) {
                         for (var i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {
@@ -581,58 +646,59 @@ export var sys;
                         }
                     }
                     return -1;
-                }
-                static removeAt(array, index) {
+                };
+                Array.removeAt = function (array, index) {
                     return array.splice(index, 1)[0];
-                }
-                static remove(array, k, compare) {
+                };
+                Array.remove = function (array, k, compare) {
                     if (compare) {
-                        for (let i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {
                                 return array.splice(i, 1)[0];
                             }
                         }
                     }
                     else {
-                        for (let i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             if (array[i] == k) {
                                 return array.splice(i, 1)[0];
                             }
                         }
                     }
-                }
-                static getMatched(array, k, compare = (arrayItem, t) => arrayItem === t) {
-                    let ret;
-                    for (let i = 0; i < array.length; i++) {
+                };
+                Array.getMatched = function (array, k, compare) {
+                    if (compare === void 0) { compare = function (arrayItem, t) { return arrayItem === t; }; }
+                    var ret;
+                    for (var i = 0; i < array.length; i++) {
                         if (compare(array[i], k)) {
                             ret = array[i];
                             break;
                         }
                     }
                     return ret;
-                }
-                static getAllMatched(array, k, compare) {
-                    let returnValue = [];
+                };
+                Array.getAllMatched = function (array, k, compare) {
+                    var returnValue = [];
                     if (compare) {
-                        for (let i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {
                                 returnValue.push(array[i]);
                             }
                         }
                     }
                     else {
-                        for (let i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             if (array[i] == k) {
                                 returnValue.push(array[i]);
                             }
                         }
                     }
                     return returnValue;
-                }
-                static removeAllMatched(array, k, compare) {
-                    let returnValue = [];
+                };
+                Array.removeAllMatched = function (array, k, compare) {
+                    var returnValue = [];
                     if (compare) {
-                        for (let i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             if (compare(array[i], k)) {
                                 returnValue.push(array.splice(i, 1)[0]);
                                 i--;
@@ -640,7 +706,7 @@ export var sys;
                         }
                     }
                     else {
-                        for (let i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             if (array[i] == k) {
                                 returnValue.push(array.splice(i, 1)[0]);
                                 i--;
@@ -648,10 +714,11 @@ export var sys;
                         }
                     }
                     return returnValue;
-                }
-            }
+                };
+                return Array;
+            }());
             StaticTools.Array = Array;
         })(StaticTools = type.StaticTools || (type.StaticTools = {}));
     })(type = sys.type || (sys.type = {}));
-})(sys || (sys = {}));
+})(sys = exports.sys || (exports.sys = {}));
 //# sourceMappingURL=index.js.map
