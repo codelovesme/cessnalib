@@ -134,10 +134,8 @@ export namespace js {
   }
 }
 export namespace ts {
-  export type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
-  export namespace union {
     export type TupleFromUnion<Union> = _TupleFromUnion<Union>;
-  }
+    export type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
 }
 export namespace injection {
   export class StaticTools {
