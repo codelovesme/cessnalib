@@ -1,3 +1,4 @@
+import { TupleFromUnion as _TupleFromUnion } from "./tuple-from-union";
 export declare const JavascriptDate: DateConstructor;
 export declare namespace js {
     class Class {
@@ -13,6 +14,12 @@ export declare namespace js {
         static instanceOf<T>(referenceObject: T, obj: any | T): obj is T;
         static doesCover(obj1: any, obj2: any): boolean;
         static doesMongoCover(obj: any, query: any): boolean;
+    }
+}
+export declare namespace ts {
+    type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
+    namespace union {
+        type TupleFromUnion<Union> = _TupleFromUnion<Union>;
     }
 }
 export declare namespace injection {
