@@ -17,10 +17,8 @@ export declare namespace js {
     }
 }
 export declare namespace ts {
+    type TupleFromUnion<Union> = _TupleFromUnion<Union>;
     type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
-    namespace union {
-        type TupleFromUnion<Union> = _TupleFromUnion<Union>;
-    }
 }
 export declare namespace injection {
     class StaticTools {
