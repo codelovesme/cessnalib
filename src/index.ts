@@ -1,4 +1,5 @@
 import * as sift from "sift";
+import {TupleFromUnion as _TupleFromUnion} from "./tuple-from-union";
 export const JavascriptDate = Date;
 
 export namespace js {
@@ -130,6 +131,12 @@ export namespace js {
       let array = sift.default(query, [obj]);
       return array instanceof Array && array.length > 0;
     }
+  }
+}
+export namespace ts {
+  export type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
+  export namespace union {
+    export type TupleFromUnion<Union> = _TupleFromUnion<Union>;
   }
 }
 export namespace injection {
