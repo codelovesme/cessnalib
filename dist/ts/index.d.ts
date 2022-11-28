@@ -1,6 +1,5 @@
-import { TupleFromUnion as _TupleFromUnion } from "./tuple-from-union";
+export * from "./tuple-from-union";
 export * as test from "./test";
-export declare type TupleFromUnion<Union> = _TupleFromUnion<Union>;
 export declare type TupleHead<Tuple extends readonly unknown[]> = Tuple extends [
     infer HeadElement,
     ...(readonly unknown[])
