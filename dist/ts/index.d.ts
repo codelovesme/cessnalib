@@ -17,3 +17,4 @@ export declare type TupleUnionFromUnion<U extends string, R extends string[] = [
     [S in U]: Exclude<U, S> extends never ? [...R, S] : TupleUnionFromUnion<Exclude<U, S>, [...R, S]>;
 }[U] & string[];
 export declare type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
+export declare type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any ? R : never;
