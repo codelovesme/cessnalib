@@ -26,3 +26,5 @@ export type TupleUnionFromUnion<U extends string, R extends string[] = []> = {
 }[U] &
   string[];
 export type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
+
+export type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any ? R : never;
