@@ -1,6 +1,6 @@
 import { AssertTrue, AssertFalse } from "./assert.h";
 import { Equals } from "./equals.h";
-export declare type Result = [
+export type Result = [
     AssertTrue<Equals<{}, object>>,
     AssertTrue<Equals<object, {}>>,
     AssertTrue<Equals<{

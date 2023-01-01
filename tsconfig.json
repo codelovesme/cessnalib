@@ -5,8 +5,7 @@
         "removeComments": false,
         "sourceMap": true,
         "declaration":true,
-        "outDir": "dist",
-        "moduleResolution":"Node16"
+        "outDir": "dist"
     },
     "files": [ "src/index.ts"]
 }
