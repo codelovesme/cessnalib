@@ -1,4 +1,4 @@
-export declare namespace injection {
+export declare namespace inject {
     class StaticTools {
         static valueOfValueChooser(valueChooser: ValueChooser): string;
     }

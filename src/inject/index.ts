@@ -1,4 +1,4 @@
-export namespace injection {
+export namespace inject {
     export class StaticTools {
       public static valueOfValueChooser(valueChooser: ValueChooser): string {
         return valueChooser.values[valueChooser.index];

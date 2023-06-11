@@ -1,4 +1,4 @@
-export * from "./injection";
+export * from "./inject";
 export * from "./js";
-export * from "./sys";
+export * from "./type";
 export * as ts from "./ts";

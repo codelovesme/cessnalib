@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.injection = void 0;
-var injection;
-(function (injection) {
+exports.inject = void 0;
+var inject;
+(function (inject) {
     var StaticTools = /** @class */ (function () {
         function StaticTools() {
         }
@@ -11,25 +11,25 @@ var injection;
         };
         return StaticTools;
     }());
-    injection.StaticTools = StaticTools;
+    inject.StaticTools = StaticTools;
     var Configuration = /** @class */ (function () {
         function Configuration() {
         }
         return Configuration;
     }());
-    injection.Configuration = Configuration;
+    inject.Configuration = Configuration;
     var ValueChooser = /** @class */ (function () {
         function ValueChooser() {
             this.index = 0;
         }
         return ValueChooser;
     }());
-    injection.ValueChooser = ValueChooser;
+    inject.ValueChooser = ValueChooser;
     var ObjectChooser = /** @class */ (function () {
         function ObjectChooser() {
         }
         return ObjectChooser;
     }());
-    injection.ObjectChooser = ObjectChooser;
-})(injection = exports.injection || (exports.injection = {}));
+    inject.ObjectChooser = ObjectChooser;
+})(inject = exports.inject || (exports.inject = {}));
 //# sourceMappingURL=index.js.map
