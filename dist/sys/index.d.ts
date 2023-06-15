@@ -1,4 +1,4 @@
-export declare namespace type {
+export declare namespace sys {
     type HttpHeaderUnion = "a-im" | "accept" | "accept-charset" | "accept-encoding" | "accept-language" | "accept-datetime" | "access-control-request-method" | "access-control-request-headers" | "authorization" | "cache-control" | "connection" | "content-length" | "content-type" | "cookie" | "date" | "expect" | "forwarded" | "from" | "host" | "if-match" | "if-modified-since" | "if-none-match" | "if-range" | "if-unmodified-since" | "max-forwards" | "origin" | "pragma" | "proxy-authorization" | "range" | "referer" | "te" | "user-agent" | "upgrade" | "via" | "Warning";
     type Headers = {
         [key in HttpHeaderUnion]?: string;
@@ -83,7 +83,7 @@ export declare namespace type {
     }
     namespace StaticTools {
         class Point2D {
-            static distance(point1: type.Point2D, point2: type.Point2D): number;
+            static distance(point1: sys.Point2D, point2: sys.Point2D): number;
         }
         class Any {
             static equals(val1: any, val2: any, deep: boolean): boolean;
@@ -101,29 +101,29 @@ export declare namespace type {
             static generate(): string;
         }
         class TimeSpan {
-            static fromUnixTimestamp(timestamp: number): type.TimeSpan;
-            static toUnixTimestamp(timespan: type.TimeSpan): number;
+            static fromUnixTimestamp(timestamp: number): sys.TimeSpan;
+            static toUnixTimestamp(timespan: sys.TimeSpan): number;
         }
         class Time {
-            static biggerThan(time1: type.Time, time2: type.Time): boolean;
-            static equals(time1: type.Time, time2: type.Time): boolean;
-            static now(): type.Time;
-            static addMiliseconds(time: type.Time, miliseconds: number): type.Time;
-            static addMinutes(time: type.Time, minutes: number): type.Time;
+            static biggerThan(time1: sys.Time, time2: sys.Time): boolean;
+            static equals(time1: sys.Time, time2: sys.Time): boolean;
+            static now(): sys.Time;
+            static addMiliseconds(time: sys.Time, miliseconds: number): sys.Time;
+            static addMinutes(time: sys.Time, minutes: number): sys.Time;
             static DayToMiliseconds(minute: number): number;
             static HourToMiliseconds(minute: number): number;
             static MinuteToMiliseconds(minute: number): number;
             static SecondToMiliseconds(minute: number): number;
-            static fromJavascriptDate(date: any): type.Time;
-            static toJavascriptDate(time: type.Time): any;
+            static fromJavascriptDate(date: any): sys.Time;
+            static toJavascriptDate(time: sys.Time): any;
         }
         class Date {
-            static equals(date1: type.Date, date2: type.Date): boolean;
-            static biggerThan(date1: type.Date, date2: type.Date): boolean;
+            static equals(date1: sys.Date, date2: sys.Date): boolean;
+            static biggerThan(date1: sys.Date, date2: sys.Date): boolean;
         }
         class Clock {
-            static equals(clock1: type.Clock, clock2: type.Clock): boolean;
-            static biggerThan(clock1: type.Clock, clock2: type.Clock): boolean;
+            static equals(clock1: sys.Clock, clock2: sys.Clock): boolean;
+            static biggerThan(clock1: sys.Clock, clock2: sys.Clock): boolean;
         }
         class Array {
             static lastElement<T>(array: T[]): T;

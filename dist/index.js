@@ -17,6 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ts = void 0;
 __exportStar(require("./inject"), exports);
 __exportStar(require("./js"), exports);
-__exportStar(require("./type"), exports);
+__exportStar(require("./sys"), exports);
 exports.ts = require("./ts");
 //# sourceMappingURL=index.js.map
