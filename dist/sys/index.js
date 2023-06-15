@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.type = void 0;
+exports.sys = void 0;
 var index_1 = require("../index");
 var JavascriptDate = Date;
-var type;
-(function (type) {
+var sys;
+(function (sys) {
     var Observable = /** @class */ (function () {
         function Observable(run) {
             var _this = this;
@@ -21,7 +21,7 @@ var type;
         };
         return Observable;
     }());
-    type.Observable = Observable;
+    sys.Observable = Observable;
     var Exception = /** @class */ (function () {
         function Exception(message, innerException) {
             this.message = message;
@@ -29,7 +29,7 @@ var type;
         }
         return Exception;
     }());
-    type.Exception = Exception;
+    sys.Exception = Exception;
     var Map = /** @class */ (function () {
         function Map(compareKeys) {
             this.compareKeys = compareKeys;
@@ -91,7 +91,7 @@ var type;
         };
         return Map;
     }());
-    type.Map = Map;
+    sys.Map = Map;
     var Point2D = /** @class */ (function () {
         function Point2D(x, y) {
             this.x = x;
@@ -100,7 +100,7 @@ var type;
         }
         return Point2D;
     }());
-    type.Point2D = Point2D;
+    sys.Point2D = Point2D;
     var TimeSpan = /** @class */ (function () {
         function TimeSpan(days, hours, minutes, seconds, miliseconds) {
             this.days = days;
@@ -112,7 +112,7 @@ var type;
         }
         return TimeSpan;
     }());
-    type.TimeSpan = TimeSpan;
+    sys.TimeSpan = TimeSpan;
     var Time = /** @class */ (function () {
         function Time(date, clock) {
             this.date = date;
@@ -121,7 +121,7 @@ var type;
         }
         return Time;
     }());
-    type.Time = Time;
+    sys.Time = Time;
     var Date = /** @class */ (function () {
         function Date(year, month, day) {
             this.year = year;
@@ -131,7 +131,7 @@ var type;
         }
         return Date;
     }());
-    type.Date = Date;
+    sys.Date = Date;
     var Clock = /** @class */ (function () {
         function Clock(hour, minute, second) {
             this.hour = hour;
@@ -141,11 +141,11 @@ var type;
         }
         return Clock;
     }());
-    type.Clock = Clock;
+    sys.Clock = Clock;
     var reference;
     (function (reference) {
-        reference.Exception = new type.Exception("Exception", null);
-    })(reference = type.reference || (type.reference = {}));
+        reference.Exception = new sys.Exception("Exception", null);
+    })(reference = sys.reference || (sys.reference = {}));
     var StaticTools;
     (function (StaticTools) {
         var Point2D = /** @class */ (function () {
@@ -268,7 +268,7 @@ var type;
                 var seconds = Math.floor(timestamp / 1000);
                 timestamp -= seconds * 1000;
                 var miliseconds = timestamp;
-                return new type.TimeSpan(days, hours, minutes, seconds, miliseconds);
+                return new sys.TimeSpan(days, hours, minutes, seconds, miliseconds);
             };
             TimeSpan.toUnixTimestamp = function (timespan) {
                 var fromdays = timespan.days * 60 * 60 * 24 * 1000;
@@ -297,7 +297,7 @@ var type;
             };
             Time.now = function () {
                 var newDate = new JavascriptDate();
-                return new type.Time(new type.Date(newDate.getUTCFullYear(), newDate.getUTCMonth() + 1, newDate.getUTCDate()), new type.Clock(newDate.getUTCHours(), newDate.getUTCMinutes(), newDate.getUTCSeconds()));
+                return new sys.Time(new sys.Date(newDate.getUTCFullYear(), newDate.getUTCMonth() + 1, newDate.getUTCDate()), new sys.Clock(newDate.getUTCHours(), newDate.getUTCMinutes(), newDate.getUTCSeconds()));
             };
             Time.addMiliseconds = function (time, miliseconds) {
                 return Time.fromJavascriptDate(new JavascriptDate(Time.toJavascriptDate(time).getTime() + miliseconds));
@@ -319,7 +319,7 @@ var type;
                 return minute * 1000;
             };
             Time.fromJavascriptDate = function (date) {
-                return new type.Time(new type.Date(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()), new type.Clock(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()));
+                return new sys.Time(new sys.Date(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()), new sys.Clock(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()));
             };
             Time.toJavascriptDate = function (time) {
                 var date = new JavascriptDate();
@@ -389,7 +389,7 @@ var type;
                 var ret = [];
                 for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
                     var item = array_1[_i];
-                    if (!type.StaticTools.Array.contains(ret, item, compare)) {
+                    if (!sys.StaticTools.Array.contains(ret, item, compare)) {
                         ret.push(item);
                     }
                 }
@@ -539,6 +539,6 @@ var type;
             return Array;
         }());
         StaticTools.Array = Array;
-    })(StaticTools = type.StaticTools || (type.StaticTools = {}));
-})(type = exports.type || (exports.type = {}));
+    })(StaticTools = sys.StaticTools || (sys.StaticTools = {}));
+})(sys = exports.sys || (exports.sys = {}));
 //# sourceMappingURL=index.js.map

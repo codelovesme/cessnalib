@@ -2,7 +2,7 @@ import { js } from "../index";
 
 const JavascriptDate = Date;
 
-export namespace type {
+export namespace sys {
   export type HttpHeaderUnion =
     | "a-im"
     | "accept"
@@ -175,11 +175,11 @@ export namespace type {
     | null
     | symbol;
   export namespace reference {
-    export const Exception = new type.Exception("Exception", null);
+    export const Exception = new sys.Exception("Exception", null);
   }
   export namespace StaticTools {
     export class Point2D {
-      public static distance(point1: type.Point2D, point2: type.Point2D) {
+      public static distance(point1: sys.Point2D, point2: sys.Point2D) {
         return Math.sqrt(
           Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2)
         );
@@ -259,7 +259,7 @@ export namespace type {
       }
     }
     export class TimeSpan {
-      public static fromUnixTimestamp(timestamp: number): type.TimeSpan {
+      public static fromUnixTimestamp(timestamp: number): sys.TimeSpan {
         var days = Math.floor(timestamp / (1000 * 60 * 60 * 24));
         timestamp -= days * (1000 * 60 * 60 * 24);
 
@@ -274,7 +274,7 @@ export namespace type {
 
         var miliseconds = timestamp;
 
-        return new type.TimeSpan(
+        return new sys.TimeSpan(
           days,
           hours,
           minutes,
@@ -282,7 +282,7 @@ export namespace type {
           miliseconds
         );
       }
-      public static toUnixTimestamp(timespan: type.TimeSpan): number {
+      public static toUnixTimestamp(timespan: sys.TimeSpan): number {
         let fromdays = timespan.days * 60 * 60 * 24 * 1000;
         let fromhours = timespan.hours * 60 * 60 * 1000;
         let fromminutes = timespan.minutes * 60 * 1000;
@@ -295,8 +295,8 @@ export namespace type {
     }
     export class Time {
       public static biggerThan(
-        time1: type.Time,
-        time2: type.Time
+        time1: sys.Time,
+        time2: sys.Time
       ): boolean {
         return Date.biggerThan(time1.date, time2.date)
           ? true
@@ -305,23 +305,23 @@ export namespace type {
             : Clock.biggerThan(time1.clock, time2.clock);
       }
       public static equals(
-        time1: type.Time,
-        time2: type.Time
+        time1: sys.Time,
+        time2: sys.Time
       ): boolean {
         return (
           Date.equals(time1.date, time2.date) &&
           Clock.equals(time1.clock, time2.clock)
         );
       }
-      public static now(): type.Time {
+      public static now(): sys.Time {
         let newDate = new JavascriptDate();
-        return new type.Time(
-          new type.Date(
+        return new sys.Time(
+          new sys.Date(
             newDate.getUTCFullYear(),
             newDate.getUTCMonth() + 1,
             newDate.getUTCDate()
           ),
-          new type.Clock(
+          new sys.Clock(
             newDate.getUTCHours(),
             newDate.getUTCMinutes(),
             newDate.getUTCSeconds()
@@ -329,9 +329,9 @@ export namespace type {
         );
       }
       public static addMiliseconds(
-        time: type.Time,
+        time: sys.Time,
         miliseconds: number
-      ): type.Time {
+      ): sys.Time {
         return Time.fromJavascriptDate(
           new JavascriptDate(
             Time.toJavascriptDate(time).getTime() + miliseconds
@@ -339,9 +339,9 @@ export namespace type {
         );
       }
       public static addMinutes(
-        time: type.Time,
+        time: sys.Time,
         minutes: number
-      ): type.Time {
+      ): sys.Time {
         let miliseconds = minutes * 60000;
         return Time.addMiliseconds(time, miliseconds);
       }
@@ -357,21 +357,21 @@ export namespace type {
       public static SecondToMiliseconds(minute: number): number {
         return minute * 1000;
       }
-      public static fromJavascriptDate(date: any): type.Time {
-        return new type.Time(
-          new type.Date(
+      public static fromJavascriptDate(date: any): sys.Time {
+        return new sys.Time(
+          new sys.Date(
             date.getUTCFullYear(),
             date.getUTCMonth() + 1,
             date.getUTCDate()
           ),
-          new type.Clock(
+          new sys.Clock(
             date.getUTCHours(),
             date.getUTCMinutes(),
             date.getUTCSeconds()
           )
         );
       }
-      public static toJavascriptDate(time: type.Time): any {
+      public static toJavascriptDate(time: sys.Time): any {
         let date = new JavascriptDate();
         date.setUTCFullYear(time.date.year);
         date.setUTCMonth(time.date.month - 1);
@@ -384,8 +384,8 @@ export namespace type {
     }
     export class Date {
       public static equals(
-        date1: type.Date,
-        date2: type.Date
+        date1: sys.Date,
+        date2: sys.Date
       ): boolean {
         return (
           date1.year == date2.year &&
@@ -394,8 +394,8 @@ export namespace type {
         );
       }
       public static biggerThan(
-        date1: type.Date,
-        date2: type.Date
+        date1: sys.Date,
+        date2: sys.Date
       ): boolean {
         return date1.year > date2.year
           ? true
@@ -410,8 +410,8 @@ export namespace type {
     }
     export class Clock {
       public static equals(
-        clock1: type.Clock,
-        clock2: type.Clock
+        clock1: sys.Clock,
+        clock2: sys.Clock
       ): boolean {
         return (
           clock1.hour == clock2.hour &&
@@ -420,8 +420,8 @@ export namespace type {
         );
       }
       public static biggerThan(
-        clock1: type.Clock,
-        clock2: type.Clock
+        clock1: sys.Clock,
+        clock2: sys.Clock
       ): boolean {
         return clock1.hour > clock2.hour
           ? true
@@ -444,7 +444,7 @@ export namespace type {
       ) {
         let ret: T[] = [];
         for (let item of array) {
-          if (!type.StaticTools.Array.contains(ret, item, compare)) {
+          if (!sys.StaticTools.Array.contains(ret, item, compare)) {
             ret.push(item);
           }
         }
