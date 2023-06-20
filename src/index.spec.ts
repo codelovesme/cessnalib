@@ -2,11 +2,11 @@
  * Created by codelovesme on 6/19/2015.
  */
 
-import { sys, js } from "../src/index";
+import { sys, js } from "./index";
 import * as chai from "chai";
 
 import Class = js.Class;
-import StaticTools = sys.type.StaticTools;
+import StaticTools = sys.StaticTools;
 
 describe("cessnalib", () => {
     describe("js", () => {
@@ -17,7 +17,7 @@ describe("cessnalib", () => {
                     let obj1 = {};
                     let obj2 = {};
                     //when
-                    let result = StaticTools.Object.equals(obj1, obj2);
+                    let result = StaticTools.Obj.equals(obj1, obj2);
                     //then
                     chai.expect(result).to.be.true;
                 });
@@ -26,7 +26,7 @@ describe("cessnalib", () => {
                     let obj1 = { name: "fedai", surname: "kaya" };
                     let obj2 = { name: "fedai", surname: "kaya" };
                     //when
-                    let result = StaticTools.Object.equals(obj1, obj2);
+                    let result = StaticTools.Obj.equals(obj1, obj2);
                     //then
                     chai.expect(result).to.be.true;
                 });
@@ -35,7 +35,7 @@ describe("cessnalib", () => {
                     let obj1 = { name: "fedai", surname: "kaya" };
                     let obj2 = { name: "fedai", surname: "kaya" };
                     //when
-                    let result = StaticTools.Object.equals(obj1, obj2);
+                    let result = StaticTools.Obj.equals(obj1, obj2);
                     //then
                     chai.expect(result).to.be.true;
                 });
@@ -44,7 +44,7 @@ describe("cessnalib", () => {
                     let obj1 = { name: "fedai", surname: "kaya", pet: { name: "Doggy" } };
                     let obj2 = { name: "fedai", surname: "kaya", pet: { name: "Doggy" } };
                     //when
-                    let result = StaticTools.Object.equals(obj1, obj2, true);
+                    let result = StaticTools.Obj.equals(obj1, obj2, true);
                     //then
                     chai.expect(result).to.be.true;
                 });
@@ -54,8 +54,8 @@ describe("cessnalib", () => {
                     let obj1 = { name: "fedai", surname: "kaya", obj: obj };
                     let obj2 = { name: "fedai", surname: "kaya", obj: obj };
                     //when
-                    let result = StaticTools.Object.equals(obj1, obj2);
-                    let result2 = StaticTools.Object.equals(obj1, obj2, true);
+                    let result = StaticTools.Obj.equals(obj1, obj2);
+                    let result2 = StaticTools.Obj.equals(obj1, obj2, true);
                     //then
                     chai.expect(result).to.be.true;
                     chai.expect(result2).to.be.true;
@@ -67,9 +67,9 @@ describe("cessnalib", () => {
                     let obj2 = { name: "ahmet", surname: "efendi" };
                     let obj3 = { J: "j" };
                     //when
-                    let result = StaticTools.Object.equals(obj1, obj2);
-                    let result2 = StaticTools.Object.equals(obj1, obj3, true);
-                    let result3 = StaticTools.Object.equals(obj1, obj, true);
+                    let result = StaticTools.Obj.equals(obj1, obj2);
+                    let result2 = StaticTools.Obj.equals(obj1, obj3, true);
+                    let result3 = StaticTools.Obj.equals(obj1, obj, true);
                     //then
                     chai.expect(result).to.be.false;
                     chai.expect(result2).to.be.false;
