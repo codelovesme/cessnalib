@@ -21,10 +21,14 @@ export type TupleTail<Tuple extends readonly unknown[]> = Tuple extends [
  */
 export type TupleUnionFromUnion<U extends string, R extends string[] = []> = {
   [S in U]: Exclude<U, S> extends never
-    ? [...R, S]
-    : TupleUnionFromUnion<Exclude<U, S>, [...R, S]>;
+  ? [...R, S]
+  : TupleUnionFromUnion<Exclude<U, S>, [...R, S]>;
 }[U] &
   string[];
 export type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
 
 export type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any ? R : never;
+
+export type KeyForValue<T extends object, V> = {
+  [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T];

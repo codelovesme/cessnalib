@@ -287,6 +287,15 @@ describe("cessnalib", () => {
                     //then
                     chai.expect(result).to.be.true;
                 });
+                it("should return true if obj1 mongoCover obj2 - 6", () => {
+                    //given
+                    let obj1 = {"meta":{"class":"Impulse"}};
+                    let obj2 = {"meta":{"class":"Impulse"},"data":{"particle":{"meta":{"class":"Authenticate"},"data":{"euglenaName":"codelovesme","password":"mmmmmmm"}},"source":"Postman"}};
+                    //when
+                    let result = js.Class.doesMongoCover(obj2, obj1);
+                    //then
+                    chai.expect(result).to.be.true;
+                });
             });
         });
     });
