@@ -18,3 +18,6 @@ export declare type TupleUnionFromUnion<U extends string, R extends string[] = [
 }[U] & string[];
 export declare type UnionFromTuple<Tuple extends Array<unknown>> = Tuple[number];
 export declare type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any ? R : never;
+export declare type KeyForValue<T extends object, V> = {
+    [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T];
