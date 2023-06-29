@@ -178,6 +178,15 @@ export namespace sys {
     export const Exception = new sys.Exception("Exception", null);
   }
   export namespace StaticTools {
+    export class Email {
+      public static validateEmail(email: string) {
+        // Regular expression pattern for email validation
+        const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // Check if the email matches the pattern
+        return pattern.test(email);
+      }
+    }
     export class Point2D {
       public static distance(point1: sys.Point2D, point2: sys.Point2D) {
         return Math.sqrt(

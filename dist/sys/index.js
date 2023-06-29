@@ -148,6 +148,18 @@ var sys;
     })(reference = sys.reference || (sys.reference = {}));
     var StaticTools;
     (function (StaticTools) {
+        var Email = /** @class */ (function () {
+            function Email() {
+            }
+            Email.validateEmail = function (email) {
+                // Regular expression pattern for email validation
+                var pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                // Check if the email matches the pattern
+                return pattern.test(email);
+            };
+            return Email;
+        }());
+        StaticTools.Email = Email;
         var Point2D = /** @class */ (function () {
             function Point2D() {
             }
