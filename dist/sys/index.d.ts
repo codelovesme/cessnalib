@@ -82,6 +82,9 @@ export declare namespace sys {
         const Exception: Exception;
     }
     namespace StaticTools {
+        class Email {
+            static validateEmail(email: string): boolean;
+        }
         class Point2D {
             static distance(point1: sys.Point2D, point2: sys.Point2D): number;
         }
